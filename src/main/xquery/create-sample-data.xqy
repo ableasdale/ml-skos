@@ -5,7 +5,7 @@ xquery version "1.0-ml";
  : Example taken from http://oclc.org/developer/documentation/terminology-services/skos-example
 :)
 
-declare variable $skos-example :=
+declare function local:create-skos($pref-label as xs:string) {
 <skos:Concept rdf:about="gsafd/GSAFD000042" xml:base="http://tspilot.oclc.org/" xmlns:dct="http://purl.org/dc/terms/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#">
   <skos:inScheme rdf:resource="http://tspilot.oclc.org/gsafd"/>
   <dct:identifier>GSAFD000042</dct:identifier>
@@ -18,7 +18,7 @@ declare variable $skos-example :=
   <dct:type xml:lang="en">approved</dct:type>
   <dct:type xml:lang="en">form/genre</dct:type>
 
-  <skos:prefLabel>Fantasy fiction</skos:prefLabel>
+  <skos:prefLabel>{$pref-label}</skos:prefLabel>
   <skos:altLabel>Apocalyptic fantasies</skos:altLabel>
   <skos:altLabel>End-of-the-world fantasies</skos:altLabel>
   <skos:altLabel>Fantastic fiction</skos:altLabel>
@@ -598,7 +598,7 @@ declare variable $skos-example :=
   <skos:changeNote xml:lang="en">Modified by agency: OCoLC-O</skos:changeNote>
   <dct:source rdf:resource="gsafd/GSAFD000042"/>
   <dct:conformsTo rdf:resource="http://www.w3.org/TR/2009/REC-skos-reference-20090818/"/>
-</skos:Concept>;
+</skos:Concept>};
 
 declare private function local:random-hex($seq as xs:integer*) as xs:string+ {
   for $i in $seq return 
@@ -611,4 +611,4 @@ declare function local:guid() as xs:string {
 };
 
 for $x in ("Science fiction", "Fantasy fiction", "Geography", "General", "Programming")
-return xdmp:document-insert(concat(local:guid(),".xml"), $skos-example)
+return xdmp:document-insert(concat(local:guid(),".xml"), local:create-skos($x))
