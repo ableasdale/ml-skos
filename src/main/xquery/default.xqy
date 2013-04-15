@@ -4,6 +4,7 @@ declare boundary-space preserve;
   
 declare default element namespace "http://www.w3.org/1999/xhtml";
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
+declare namespace dct="http://purl.org/dc/terms/";
 
 declare variable $title as xs:string := "SKOS Editor: Home";
 
@@ -17,9 +18,10 @@ declare variable $title as xs:string := "SKOS Editor: Home";
         <div class="container">
            <h2>{$title}</h2>
            <p>Currently logged in as: <strong>{xdmp:get-current-user()}</strong>.</p>
-           <p>Recently added terms:</p>
+           <p>Recently added/modified terms:</p>
            <ul>
-           {for $i in doc()
+           {for $i in doc()[1 to 5]
+           order by $i//dct:modified descending
            return 
            element li {
             element a {
