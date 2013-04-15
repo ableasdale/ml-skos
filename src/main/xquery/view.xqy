@@ -2,12 +2,9 @@ xquery version "1.0-ml";
  
 declare boundary-space preserve;
  
-(: compare with 
+(: Codemirror formatted view of db content :)
 
-http://localhost:8080/exist/rest//db/stuff/index.xq
-:) 
 declare default element namespace "http://www.w3.org/1999/xhtml";
-
 
 declare variable $q as xs:string := concat(xdmp:get-request-field("id", "e0ce0746-b1e8-9e54-dbe1-2214c8396771"),".xml");
 let $doc := doc($q)

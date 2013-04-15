@@ -1,11 +1,14 @@
 xquery version "1.0-ml";
 
+declare boundary-space preserve;
+declare namespace skos="http://www.w3.org/2004/02/skos/core#";
+
 (:~
  : Create Canned SKOS Example for insertion into the DB
  : Example taken from http://oclc.org/developer/documentation/terminology-services/skos-example
 :)
 
-declare function local:create-skos($pref-label as xs:string) {
+declare function local:create-skos($pref-label as xs:string) as element(skos:Concept) {
 <skos:Concept rdf:about="gsafd/GSAFD000042" xml:base="http://tspilot.oclc.org/" xmlns:dct="http://purl.org/dc/terms/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#">
   <skos:inScheme rdf:resource="http://tspilot.oclc.org/gsafd"/>
   <dct:identifier>GSAFD000042</dct:identifier>
