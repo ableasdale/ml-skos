@@ -610,4 +610,5 @@ declare function local:guid() as xs:string {
   fn:string-join(local:random-hex((8,4,4,4,12)),"-")
 };
 
-xdmp:document-insert(concat(local:guid(),".xml"), $skos-example)
+for $x in ("Science fiction", "Fantasy fiction", "Geography", "General", "Programming")
+return xdmp:document-insert(concat(local:guid(),".xml"), $skos-example)
