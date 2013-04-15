@@ -18,7 +18,7 @@ declare variable $title as xs:string := "SKOS Editor: Home";
         <div class="container">
            <h2>{$title}</h2>
            <p>Currently logged in as: <strong>{xdmp:get-current-user()}</strong>.</p>
-           <form action="/xquery/search.xqy" method="post">
+           <form action="/search/" method="post">
             <input type="text" name="q"/>
             <input type="submit" name="go" value="go" />
            </form>
@@ -29,7 +29,7 @@ declare variable $title as xs:string := "SKOS Editor: Home";
            return 
            element li {
             element a {
-             attribute href {concat("/xquery/view.xqy?id=",fn:substring-before(xdmp:node-uri($i), "."))},
+             attribute href {concat("/view/",fn:substring-before(xdmp:node-uri($i), "."))},
              $i//skos:prefLabel/text() 
             }
             }

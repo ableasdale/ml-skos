@@ -6,9 +6,10 @@ declare boundary-space preserve;
 
 declare default element namespace "http://www.w3.org/1999/xhtml";
 
-declare variable $q as xs:string := concat(xdmp:get-request-field("id", "e0ce0746-b1e8-9e54-dbe1-2214c8396771"),".xml");
+declare variable $q as xs:string := concat(xdmp:get-request-field("id"));
+let $_ := xdmp:log(xdmp:get-request-field("id"))
 let $doc := doc($q)
-let $title := concat('Viewing doc: ', xdmp:node-uri($doc))
+let $title := concat('Viewing doc: ', $q) 
 
 
 return
