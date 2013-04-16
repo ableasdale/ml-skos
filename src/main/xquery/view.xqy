@@ -19,7 +19,8 @@ return
         <title>{$title}</title>
         <script type="text/javascript" src="/js/codemirror.js"></script>
         <script type="text/javascript" src="/js/xml.js"></script>
-        <script type="text/javascript" src="/js/active-line.js"></script>      
+        <script type="text/javascript" src="/js/active-line.js"></script>
+        
         <link rel="stylesheet" href="/css/codemirror.css" type="text/css" media="screen, projection" />
         <link rel="stylesheet" href="/css/docs.css" type="text/css" media="screen, projection" />
         <style type="text/css"><![CDATA[
@@ -29,24 +30,29 @@ return
     </head>
     <body>
         <div class="container">
-           <h2>{$title}</h2>
-           <p>Currently logged in as: <strong>{xdmp:get-current-user()}</strong>.</p>
-           
-
-<form><textarea id="code" name="code">
-{xdmp:quote($doc)}
-</textarea></form>
-
-    <script type="text/javascript"><![CDATA[
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        mode: "application/xml",
-        styleActiveLine: true,
-        
-        lineNumbers: true,
-        autoCloseTags: true
-      }); 
-    ]]></script>
-           
+            <h2>{$title}</h2>
+            <p><a href="/">Home</a> |
+            <form action="/xquery/search.xqy" method="post">
+                <input type="text" name="q"/>
+                <input type="submit" name="go" value="go" />
+           </form>
+            </p>
+            <p>Currently logged in as: <strong>{xdmp:get-current-user()}</strong>.</p>
+            <form action="/xquery/edit.xqy" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <textarea id="code" name="code">{xdmp:quote($doc)}</textarea>
+                <input type="hidden" name="uri" value="{$q}" />
+                <p>    
+                    <input type="submit" value="Update Document" />
+                </p>
+            </form>
         </div>
+        <script type="text/javascript"><![CDATA[
+          var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            mode: "application/xml",
+            styleActiveLine: true,
+            lineNumbers: true,
+            autoCloseTags: true
+          });]]>
+        </script>    
     </body>
 </html>)

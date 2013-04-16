@@ -18,7 +18,8 @@ declare variable $title as xs:string := "SKOS Editor: Home";
         <div class="container">
            <h2>{$title}</h2>
            <p>Currently logged in as: <strong>{xdmp:get-current-user()}</strong>.</p>
-           <form action="/search/" method="post">
+           <!-- TODO - rewrite this -->
+           <form action="/xquery/search.xqy" method="post">
             <input type="text" name="q"/>
             <input type="submit" name="go" value="go" />
            </form>

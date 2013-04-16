@@ -23,6 +23,7 @@ let $options :=
 let $rewrite := rest:rewrite($options)
 
 return
-if(starts-with($url, "/css/") or starts-with($url, "/js/"))
+(: TODO - properly handle POSTS so this is no longer necessary :)
+if(starts-with($url, "/css/") or starts-with($url, "/js/") or starts-with($url, "/xquery/search.xqy") or starts-with($url, "/xquery/edit.xqy"))
 then $url
 else $rewrite
