@@ -17,6 +17,8 @@ let $title := concat('Viewing doc: ', $q)
 
 return
 (xdmp:set-response-content-type("text/html; charset=utf-8"),
+text {'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'},
 <html lang="en">
     <head>
         <title>{$title}</title>
@@ -26,9 +28,8 @@ return
         
         <link rel="stylesheet" href="/css/codemirror.css" type="text/css" media="screen, projection" />
         <link rel="stylesheet" href="/css/blueprint.css" type="text/css" media="screen, projection" />
-        <!-- link rel="stylesheet" href="/css/docs.css" type="text/css" media="screen, projection" / -->
         <style type="text/css"><![CDATA[
-        .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black; width:90%}
+        .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
         .CodeMirror-activeline-background {background: #e8f2ff !important;}
         ]]></style>
     </head>
@@ -37,8 +38,8 @@ return
             {global:nav($title)}
             <div class="span-24 last">
                 <form action="/xquery/edit.xqy" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                    <textarea id="code" name="code">{xdmp:quote($doc)}</textarea>
-                    <input type="hidden" name="uri" value="{$q}" />
+                    <p><textarea rows="10" cols="20" id="code" name="code">{xdmp:quote($doc)}</textarea>
+                    <input type="hidden" name="uri" value="{$q}" /></p>
                     <p class="prepend-top">    
                         <input type="submit" value="Update Document" />
                     </p>

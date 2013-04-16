@@ -1,15 +1,17 @@
 xquery version "1.0-ml";
 
+import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
 import module namespace xforms = "http://www.xmlmachines.com/xforms" at "/xquery/lib/xforms.xqy";
 import module namespace xforms-skos = "http://www.xmlmachines.com/xforms-skos" at "/xquery/lib/xforms-skos.xqy"; 
  
 declare option xdmp:output "method=xhtml"; 
-declare option xdmp:output "doctype-public=-//W3C//DTD XHTML 1.0 Transitional//EN"; 
-declare option xdmp:output "doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd";
+declare option xdmp:output "doctype-public=-//W3C//DTD XHTML 1.0 Strict//EN"; 
+declare option xdmp:output "doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd";
 declare option xdmp:output "omit-xml-declaration=yes";
 declare option xdmp:output "indent=yes"; 
 
-(: <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+declare variable $title := "SKOS Concept Editor";
+(: <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 
 1/2/2013: The blank "_" namespace axis have been added to circumvent a known bug which prevents Firefox from working with instance data containing namespaces 
 (See https://bugzilla.mozilla.org/show_bug.cgi?id=94270 for more details)
@@ -40,8 +42,8 @@ xforms:xsltforms-pis(),
     </xhtml:head>
     <xhtml:body>
     <xhtml:div class="container">
-        <h2>SKOS Concept Editor</h2>
-        {
+        <xhtml:div class="span-24 last">
+        {global:nav($title),
             xforms:xhtml-fieldset-and-legend("Concept", 
                 (
                 xforms:para-with-xf-input((), "skos:prefLabel", "span-12", "Preferred Label: "),
@@ -95,7 +97,7 @@ xforms:xsltforms-pis(),
             
             </xf:case>
         </xf:switch -->
-        
+            </xhtml:div>
         </xhtml:div>
     </xhtml:body>
 </xhtml:html>
