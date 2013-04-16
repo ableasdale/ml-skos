@@ -12,27 +12,30 @@ declare variable $title as xs:string := "SKOS Editor: Home";
 
 (xdmp:set-response-content-type("text/html; charset=utf-8"),
 <html lang="en">
+    <!-- TODO - module! -->
     <head>
         <title>{$title}</title>
-        <link rel="stylesheet" href="/css/docs.css" type="text/css" media="screen, projection" />
+        <link rel="stylesheet" href="/css/blueprint.css" type="text/css" media="screen, projection" />
     </head>
     <body>
         <div class="container">
            {global:nav($title)}
-           <p>Recently added/modified terms:</p>
-           <ul>
-           { (: TODO - make this a proper query :)
-           for $i in doc()[1 to 25]
-           order by $i//dct:modified descending
-           return 
-           element li {
-            element a {
-             attribute href {concat("/view/",fn:substring-before(xdmp:node-uri($i), "."))},
-             $i//skos:prefLabel/text() 
+           <div class="span-24 last">
+            <p>Recently added/modified terms:</p>
+            <ul>
+            { (: TODO - make this a proper query :)
+            for $i in doc()[1 to 25]
+            order by $i//dct:modified descending
+            return 
+            element li {
+             element a {
+              attribute href {concat("/view/",fn:substring-before(xdmp:node-uri($i), "."))},
+              $i//skos:prefLabel/text() 
+             }
+             }
             }
-            }
-           }
-           </ul>
+            </ul>
+           </div>
         </div>
     </body>
 </html>)

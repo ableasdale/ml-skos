@@ -9,6 +9,12 @@ declare option xdmp:output "doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml
 declare option xdmp:output "omit-xml-declaration=yes";
 declare option xdmp:output "indent=yes"; 
 
+(: <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
+1/2/2013: The blank "_" namespace axis have been added to circumvent a known bug which prevents Firefox from working with instance data containing namespaces 
+(See https://bugzilla.mozilla.org/show_bug.cgi?id=94270 for more details)
+:)
+
 xdmp:set-response-content-type("application/xml"),
 xforms:xsltforms-pis(),
 <xhtml:html
@@ -29,12 +35,12 @@ xforms:xsltforms-pis(),
     <xhtml:head>
         <xhtml:title>SKOS Concept Editor</xhtml:title>
         <xhtml:script type="text/javascript" src="/xsltforms/scripts/tinymce_3.4.6/tiny_mce.js">/* */</xhtml:script>
-        <!-- xhtml:link rel="stylesheet" href="/css/blueprint.css" type="text/css" media="screen, projection"/ -->
+        <xhtml:link rel="stylesheet" href="/css/blueprint-xf.css" type="text/css" media="screen, projection" />
         {xforms-skos:base-model()} 
     </xhtml:head>
     <xhtml:body>
     <xhtml:div class="container">
-        <h1>SKOS Concept Editor</h1>
+        <h2>SKOS Concept Editor</h2>
         {
             xforms:xhtml-fieldset-and-legend("Concept", 
                 (
