@@ -16,6 +16,8 @@ declare variable $title as xs:string := "SKOS Editor: Home";
     </head>
     <body>
         <div class="container">
+           <!-- TODO - refactor this out very soon and drop the session field after display -->
+           <div id="message">{xdmp:get-session-field("message")}</div>
            <h2>{$title}</h2>
            <p>Currently logged in as: <strong>{xdmp:get-current-user()}</strong>.</p>
            <!-- TODO - rewrite this -->
@@ -25,7 +27,8 @@ declare variable $title as xs:string := "SKOS Editor: Home";
            </form>
            <p>Recently added/modified terms:</p>
            <ul>
-           {for $i in doc()[1 to 5]
+           { (: TODO - make this a proper query :)
+           for $i in doc()[1 to 25]
            order by $i//dct:modified descending
            return 
            element li {
