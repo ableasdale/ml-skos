@@ -11,12 +11,14 @@ declare variable $url := xdmp:get-request-url();
 
 let $options :=
     <rest:options>
-      <rest:request uri="^/create/$" endpoint="/xquery/create.xqy"></rest:request>
-      <rest:request uri="^/view/(.+)/?$" endpoint="/xquery/view.xqy"></rest:request>
-      <rest:request uri="^/search/(.+)/?$" endpoint="/xquery/search.xqy">
-        <rest:uri-param name="q">$1</rest:uri-param>
-      </rest:request>
-      <rest:request uri="/" endpoint="/xquery/default.xqy"/>
+        <rest:request uri="^/view/(.+)/?$" endpoint="/xquery/view.xqy">
+            <rest:uri-param name="id">$1.xml</rest:uri-param>
+        </rest:request>
+        <rest:request uri="^/create/$" endpoint="/xquery/create.xqy"></rest:request>
+        <rest:request uri="^/search/(.+)/?$" endpoint="/xquery/search.xqy">
+            <rest:uri-param name="q">$1</rest:uri-param>
+        </rest:request>
+        <rest:request uri="/" endpoint="/xquery/default.xqy"/>
     </rest:options>
  
 let $rewrite := rest:rewrite($options)

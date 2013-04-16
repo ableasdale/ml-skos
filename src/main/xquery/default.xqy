@@ -1,5 +1,7 @@
 xquery version "1.0-ml";
- 
+
+import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
+
 declare boundary-space preserve;
   
 declare default element namespace "http://www.w3.org/1999/xhtml";
@@ -16,15 +18,7 @@ declare variable $title as xs:string := "SKOS Editor: Home";
     </head>
     <body>
         <div class="container">
-           <!-- TODO - refactor this out very soon and drop the session field after display -->
-           <div id="message">{xdmp:get-session-field("message")}</div>
-           <h2>{$title}</h2>
-           <p>Currently logged in as: <strong>{xdmp:get-current-user()}</strong>.</p>
-           <!-- TODO - rewrite this -->
-           <form action="/xquery/search.xqy" method="post">
-            <input type="text" name="q"/>
-            <input type="submit" name="go" value="go" />
-           </form>
+           {global:nav($title)}
            <p>Recently added/modified terms:</p>
            <ul>
            { (: TODO - make this a proper query :)
