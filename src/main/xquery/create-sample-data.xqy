@@ -5,35 +5,43 @@ declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 
 (:~
  : Create Canned SKOS Example for insertion into the DB
- : Example taken from http://oclc.org/developer/documentation/terminology-services/skos-example
+ : Example taken (and adapted) from http://oclc.org/developer/documentation/terminology-services/skos-example
 :)
 
 declare function local:create-skos($pref-label as xs:string) as element(skos:Concept) {
-<skos:Concept rdf:about="gsafd/GSAFD000042" xml:base="http://tspilot.oclc.org/" xmlns:dct="http://purl.org/dc/terms/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#">
-  <skos:inScheme rdf:resource="http://tspilot.oclc.org/gsafd"/>
-  <dct:identifier>GSAFD000042</dct:identifier>
-  <dct:identifier>(IlChALCS)GSAFD000042</dct:identifier>
+<skos:Concept 
+    rdf:about="http://xmlmachines.com/skos" 
+    xml:base="http://xmlmachines.com/" 
+    xmlns:dct="http://purl.org/dc/terms/" 
+    xmlns:owl="http://www.w3.org/2002/07/owl#" 
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    
+    <skos:inScheme rdf:resource="http://xmlmachines.com/skos"/>
+    <dct:identifier>GSAFD000042</dct:identifier>
+    <dct:identifier>(IlChALCS)GSAFD000042</dct:identifier>
+    
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:created>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:modified>
+    <dct:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dct:language>
+    <dct:type xml:lang="en">active</dct:type>
+    <dct:type xml:lang="en">approved</dct:type>
+    <dct:type xml:lang="en">form/genre</dct:type>
 
-  <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:created>
-  <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:modified>
-  <dct:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dct:language>
-  <dct:type xml:lang="en">active</dct:type>
-  <dct:type xml:lang="en">approved</dct:type>
-  <dct:type xml:lang="en">form/genre</dct:type>
+    <skos:prefLabel>{$pref-label}</skos:prefLabel>
+    <skos:altLabel>Apocalyptic fantasies</skos:altLabel>
+    <skos:altLabel>End-of-the-world fantasies</skos:altLabel>
+    <skos:altLabel>Fantastic fiction</skos:altLabel>
+    <skos:altLabel>Fiction, Fantasy</skos:altLabel>
+    <skos:altLabel>Time travel (Fiction)</skos:altLabel>
 
-  <skos:prefLabel>{$pref-label}</skos:prefLabel>
-  <skos:altLabel>Apocalyptic fantasies</skos:altLabel>
-  <skos:altLabel>End-of-the-world fantasies</skos:altLabel>
-  <skos:altLabel>Fantastic fiction</skos:altLabel>
-  <skos:altLabel>Fiction, Fantasy</skos:altLabel>
-  <skos:altLabel>Time travel (Fiction)</skos:altLabel>
-
-  <skos:hiddenLabel>fantasy fiction</skos:hiddenLabel>
-  <skos:hiddenLabel>apocalyptic fantasies</skos:hiddenLabel>
-  <skos:hiddenLabel>end of the world fantasies</skos:hiddenLabel>
-  <skos:hiddenLabel>fantastic fiction</skos:hiddenLabel>
-  <skos:hiddenLabel>fiction fantasy</skos:hiddenLabel>
-  <skos:hiddenLabel>time travel fiction</skos:hiddenLabel>
+    <skos:hiddenLabel>fantasy fiction</skos:hiddenLabel>
+    <skos:hiddenLabel>apocalyptic fantasies</skos:hiddenLabel>
+    <skos:hiddenLabel>end of the world fantasies</skos:hiddenLabel>
+    <skos:hiddenLabel>fantastic fiction</skos:hiddenLabel>
+    <skos:hiddenLabel>fiction fantasy</skos:hiddenLabel>
+    <skos:hiddenLabel>time travel fiction</skos:hiddenLabel>
 
   <skos:related>
     <skos:Concept rdf:about="gsafd/GSAFD000110">
