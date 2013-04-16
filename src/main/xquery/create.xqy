@@ -12,6 +12,8 @@ declare option xdmp:output "indent=yes";
 xdmp:set-response-content-type("application/xml"),
 xforms:xsltforms-pis(),
 <xhtml:html
+    skos:_="_"
+    
     xmlns="http://www.w3.org/1999/xhtml" 
     xmlns:xf="http://www.w3.org/2002/xforms"      
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -23,7 +25,6 @@ xforms:xsltforms-pis(),
     xmlns:xi="http://www.w3.org/2001/XInclude" 
     
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-    
     lang="en">
     <xhtml:head>
         <xhtml:title>SKOS Concept Editor</xhtml:title>
@@ -43,12 +44,31 @@ xforms:xsltforms-pis(),
                     attribute nodeset {"skos:altLabel"}, 
                     attribute id {"altlabel-repeatset"},
                         xforms:para-with-xf-input((), ".", "span-12", "Alt Label: ")
-                }
-                
-                )
+                },
+                xforms:xhtml-fieldset-and-legend("Add / Remove",
+                    (element xf:trigger {
+                        attribute id {"add-alt-label"},
+                        element xf:label {"Add alt Label"},
+                        element xf:action { attribute ev:event {"DOMActivate"}},
+                        element xf:insert { 
+                            attribute origin {"instance('skos')"},         
+                            attribute nodeset {"skos:altLabel[last()]"}, 
+                            attribute position {"after"},
+                            attribute at {"last()"}
+                        }
+                    },
+                    element xf:trigger {
+                        attribute id {"delete-alt-label"},
+                        element xf:label {concat("Delete alt details")},
+                        element xf:action {attribute ev:event {"DOMActivate"}},
+                        element xf:delete {
+                            attribute nodeset {"skos:altLabel[last()]"}, 
+                            attribute at {"skos:altLabel[index('alt-label-repeatset')]"}
+                        }
+                })
             )
+        ))
         }
-         
         <!-- xf:submit submission="save">
             <xf:label>Save doc now</xf:label>
         </xf:submit>
@@ -73,3 +93,4 @@ xforms:xsltforms-pis(),
         </xhtml:div>
     </xhtml:body>
 </xhtml:html>
+ 
