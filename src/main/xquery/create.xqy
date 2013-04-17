@@ -47,35 +47,18 @@ xforms:xsltforms-pis(),
             xforms:xhtml-fieldset-and-legend("Concept", 
                 (
                 xforms:para-with-xf-input((), "skos:prefLabel", "span-12", "Preferred Label: "),
-                
-                element xf:repeat {
-                    attribute nodeset {"skos:altLabel"}, 
-                    attribute id {"altlabel-repeatset"},
-                        xforms:para-with-xf-input((), ".", "span-12", "Alt Label: ")
-                },
-                xforms:xhtml-fieldset-and-legend("Add / Remove",
-                    (element xf:trigger {
-                        attribute id {"add-alt-label"},
-                        element xf:label {"Add alt Label"},
-                        element xf:action { attribute ev:event {"DOMActivate"}},
-                        element xf:insert { 
-                            attribute origin {"instance('skos')"},         
-                            attribute nodeset {"skos:altLabel[last()]"}, 
-                            attribute position {"after"},
-                            attribute at {"last()"}
-                        }
-                    },
-                    element xf:trigger {
-                        attribute id {"delete-alt-label"},
-                        element xf:label {concat("Delete alt details")},
-                        element xf:action {attribute ev:event {"DOMActivate"}},
-                        element xf:delete {
-                            attribute nodeset {"skos:altLabel[last()]"}, 
-                            attribute at {"skos:altLabel[index('alt-label-repeatset')]"}
-                        }
-                })
+                xforms:xf-repeat("skos:altLabel", "altlabel-repeat", 
+                    (xforms:para-with-xf-input((), ".", "span-12", "Alt Label: "))
+                ),
+                xforms:xhtml-fieldset-and-legend("Add / Remove Alternative Label",
+                    (xforms:xf-add-trigger("add-alt-label", "Add Alternative Label", "skos:altLabel"),
+                    xforms:xf-delete-trigger("delete-alt-label", "Delete Selected Alternative Label", "skos:altLabel", "index('altlabel-repeat')"),
+                    (: below is in for debug purposes.. :)
+                    xforms:debug(xforms:xf-output("index('altlabel-repeat')",  "[Debug]: Selected row "))
+                   )
+                )
             )
-        ))
+        )
         }
         <!-- xf:submit submission="save">
             <xf:label>Save doc now</xf:label>

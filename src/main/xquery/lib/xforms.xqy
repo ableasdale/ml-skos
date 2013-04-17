@@ -11,11 +11,11 @@ import module namespace global = "http://www.xmlmachines.com/global" at "/xquery
 declare default function namespace "http://www.w3.org/2005/xpath-functions";
 
 declare function xforms:xsltforms-pis() as processing-instruction()+ {
-<?xml-stylesheet href="/xsltforms/xsltforms.xsl" type="text/xsl"?>,
-if($global:DEBUG eq "yes")
-then(<?xsltforms-options debug="yes"?>)
-else(<?xsltforms-options debug="no"?>)
-(: processing-instruction {"xml-stylesheet"} {attribute href{"xsltforms/xsltforms.xsl"}, attribute type{"text/xsl"} } :)
+    <?xml-stylesheet href="/xsltforms/xsltforms.xsl" type="text/xsl"?>,
+    if ($global:DEBUG eq "yes")
+    then (<?xsltforms-options debug="yes"?>)
+    else (<?xsltforms-options debug="no"?>)
+    (: processing-instruction {"xml-stylesheet"} {attribute href{"xsltforms/xsltforms.xsl"}, attribute type{"text/xsl"} } :)
 };
 
 declare function xforms:capitalise($string as xs:string){
@@ -29,7 +29,20 @@ declare function xforms:xhtml-fieldset-and-legend($legend as xs:string, $seq as 
     }
 };
 
-declare function xforms:xf-label($label-class as xs:string?, $label-text as xs:string)  as element(xf:label) {
+declare function xforms:debug($item) {
+    if ($global:DEBUG eq "yes")
+    then ($item)
+    else ()
+};
+
+declare function xforms:xf-output($value as xs:string, $label as xs:string) as element(xf:output) {
+    element xf:output {
+        attribute value {$value},
+        element xf:label {$label}
+    }
+};
+
+declare function xforms:xf-label($label-class as xs:string?, $label-text as xs:string) as element(xf:label) {
     element xf:label {
         if(string-length($label-class) ne 0) then(attribute class {$label-class}) else(),
         $label-text
@@ -107,5 +120,45 @@ declare function xforms:image-trigger($class as xs:string?, $src as xs:string, $
             element xhtml:img {attribute src {$src}, attribute title {$text}, attribute alt {$text}}, 
             $text},
         element xf:toggle {attribute ev:event {"DOMActivate"}, attribute case {$event-id}}
+    }
+};
+
+declare function xforms:xf-repeat($nodeset-ref as xs:string, $id as xs:string, $xf-inputs as item()+) as element(xf:repeat) {
+    element xf:repeat {
+        attribute nodeset {$nodeset-ref}, (: "skos:altLabel" :) 
+        attribute id {$id},                 (: "altlabel-repeat" :)
+        $xf-inputs
+    }
+};
+
+declare function xforms:xf-add-trigger($trigger-id as xs:string, $label as xs:string, $nodeset as xs:string) as element(xf:trigger) {
+    element xf:trigger {
+        attribute id {$trigger-id},
+        element xf:label {$label},
+        element xf:action { 
+            attribute ev:event {"DOMActivate"},
+            element xf:insert { 
+                attribute nodeset {$nodeset}, 
+                attribute at {"last()"},
+                attribute position {"after"}
+            },
+            element xf:setvalue {
+                attribute ref {concat($nodeset,"[last()]")}, 
+                attribute value {"''"}
+            }
+        }
+    }
+};
+
+declare function xforms:xf-delete-trigger($id as xs:string, $label as xs:string, $nodeset as xs:string, $at as xs:string) as element(xf:trigger) {
+    element xf:trigger {
+        attribute id {$id},
+        element xf:label {$label},
+        element xf:action {attribute ev:event {"DOMActivate"},
+            element xf:delete {
+                attribute nodeset {$nodeset}, 
+                attribute at {$at}
+            }
+        }
     }
 };
