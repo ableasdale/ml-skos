@@ -53,7 +53,6 @@ xforms:xsltforms-pis(),
                         xforms:xhtml-fieldset-and-legend("Add / Remove Alternative Label",
                             (xforms:xf-add-trigger("add-alt-label", "Add Alternative Label", "skos:altLabel"),
                             xforms:xf-delete-trigger("delete-alt-label", "Delete Selected Alternative Label", "skos:altLabel", "index('altlabel-repeat')"),
-                            (: below is in for debug purposes.. :)
                             xforms:debug(xforms:xf-output("index('altlabel-repeat')",  "[Debug]: Selected row ")))
                         )
                     )
@@ -63,35 +62,39 @@ xforms:xsltforms-pis(),
                     (xforms:xf-repeat("skos:hiddenLabel", "hiddenlabel-repeat", xforms:para-with-xf-input((), ".", "span-12", "Hidden Label: ")),
                         xforms:xhtml-fieldset-and-legend("Add / Remove Hidden Label",
                             (xforms:xf-add-trigger("add-hidden-label", "Add Hidden Label", "skos:hiddenLabel"),
-                            xforms:xf-delete-trigger("delete-hidden-label", "Delete Selected Hidden Label", "skos:hiddenLabel", "index('altlhidden-repeat')"),
-                            (: below is in for debug purposes.. :)
+                            xforms:xf-delete-trigger("delete-hidden-label", "Delete Selected Hidden Label", "skos:hiddenLabel", "index('hiddenlabel-repeat')"),
                             xforms:debug(xforms:xf-output("index('hiddenlabel-repeat')",  "[Debug]: Selected row ")))
                         )
                     )
                 )
             )
-        )
-        }
-        <!-- xf:submit submission="save">
-            <xf:label>Save doc now</xf:label>
-        </xf:submit>
-        <xf:switch>
-            <xf:case id="ready">
-                <xf:message id="hai" level="modal" ev:event="DOMActivate">Ready!</xf:message>
-            </xf:case>
-            <xf:case id="case-busy">
-                <p>Waiting for results from server...</p>
-            </xf:case>
-            <xf:case id="case-submit-error">
-                <p>Submit error</p>
-            </xf:case>
-            <xf:case id="case-submit-done">
-                <p><xf:output value="instance('submit-results')">
-                <xf:label>Output: </xf:label>
-            </xf:output></p>
-            
-            </xf:case>
-        </xf:switch -->
+        )}
+        
+        
+            <xf:submit submission="save">
+                <xf:label>Save Concept</xf:label>
+            </xf:submit>
+            <xf:switch>
+                <xf:case id="ready">
+                    <p>Ready ...</p>
+                    <xf:message level="modal" ev:event="DOMActivate">Ready!</xf:message>
+                </xf:case>
+                <xf:case id="case-busy">
+                    <p>Waiting for results from server ...</p>
+                </xf:case>
+                <xf:case id="case-submit-error">
+                    <p>Submit error</p>
+                </xf:case>
+                <xf:case id="case-submit-done">
+                    <!-- TODO - are modal messages supported in XSLTForms? and can xf:output return xhtml?  the response from MarkLogic is.. -->
+                    <xf:message level="modal" ev:event="DOMActivate">Saved</xf:message>
+                    <xhtml:p><xf:output value="instance('submit-results')">
+                    <xf:label>Output: </xf:label>
+                    </xf:output></xhtml:p>
+                </xf:case>
+            </xf:switch>
+        
+        
             </xhtml:div>
         </xhtml:div>
     </xhtml:body>

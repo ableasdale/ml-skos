@@ -23,6 +23,6 @@ declare variable $options as element(rest:options) :=
 let $rewrite := rest:rewrite($options)
 return
 (: TODO - properly handle POSTS in this rewriter so this is no longer necessary :)
-if(starts-with($url, "/xml/") or starts-with($url, "/xsltforms/") or starts-with($url, "/css/") or starts-with($url, "/js/") or starts-with($url, "/xquery/search.xqy") or starts-with($url, "/xquery/edit.xqy"))
+if(starts-with($url, "/xml/") or starts-with($url, "/xsltforms/") or starts-with($url, "/css/") or starts-with($url, "/js/") or starts-with($url, "/xquery/search.xqy") or starts-with($url, "/xquery/skos-concept-submit.xqy"))
 then $url
 else $rewrite

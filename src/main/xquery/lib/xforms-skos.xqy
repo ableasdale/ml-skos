@@ -13,14 +13,16 @@ declare namespace rte="http://www.agencexml.com/xsltforms/rte";
 declare default function namespace "http://www.w3.org/2005/xpath-functions";
  
 declare function xforms-skos:base-model() {
-        <xf:model>
-            <xf:instance id="skos" src="/xml/instance-data/skos-base.xml"/>
-            
-         
-            <!-- you MUST bind each data type to the decimal type for the range control to work 
-            <xf:bind nodeset="/data/data1" type="xs:integer" />
-            <xf:bind nodeset="/data/data2" type="xs:integer" />
-            <xf:bind nodeset="/data/data3" type="xs:integer" / -->
-            
-        </xf:model>
- };
+    <xf:model>
+        <xf:instance id="skos" src="/xml/instance-data/skos-base.xml"/>    
+        <xf:instance id="submit-results">
+            <data xmlns="" />
+        </xf:instance>
+        
+        <xf:submission id="save" method="put" replace="instance" instance="submit-results" action="/xquery/skos-concept-submit.xqy" ref="instance('skos')">
+            <xf:toggle case="case-busy" ev:event="xforms-submit"></xf:toggle>
+            <xf:toggle case="case-submit-done" ev:event="xforms-submit-done"></xf:toggle>
+            <xf:toggle case="case-submit-error" ev:event="xforms-submit-error"></xf:toggle>
+        </xf:submission>
+    </xf:model>
+};
