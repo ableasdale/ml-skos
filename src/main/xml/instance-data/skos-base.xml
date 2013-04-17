@@ -20,16 +20,8 @@
     <dct:type xml:lang="en">form/genre</dct:type>
     
     <skos:prefLabel>LABEL</skos:prefLabel>
-    <skos:altLabel>Apocalyptic fantasies</skos:altLabel>
-    <skos:altLabel>End-of-the-world fantasies</skos:altLabel>
-    <skos:altLabel>Fantastic fiction</skos:altLabel>
-    <skos:altLabel>Fiction, Fantasy</skos:altLabel>
-    <skos:altLabel>Time travel (Fiction)</skos:altLabel>
+    <skos:altLabel>ALT LABEL</skos:altLabel>
     
-    <skos:hiddenLabel>fantasy fiction</skos:hiddenLabel>
-    <skos:hiddenLabel>apocalyptic fantasies</skos:hiddenLabel>
-    <skos:hiddenLabel>end of the world fantasies</skos:hiddenLabel>
-    <skos:hiddenLabel>fantastic fiction</skos:hiddenLabel>
-    <skos:hiddenLabel>fiction fantasy</skos:hiddenLabel>
-    <skos:hiddenLabel>time travel fiction</skos:hiddenLabel>
+    <skos:hiddenLabel>HIDDEN LABEL</skos:hiddenLabel>
+    
 </skos:Concept>
