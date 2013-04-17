@@ -47,15 +47,27 @@ xforms:xsltforms-pis(),
             xforms:xhtml-fieldset-and-legend("Concept", 
                 (
                 xforms:para-with-xf-input((), "skos:prefLabel", "span-12", "Preferred Label: "),
-                xforms:xf-repeat("skos:altLabel", "altlabel-repeat", 
-                    (xforms:para-with-xf-input((), ".", "span-12", "Alt Label: "))
+                (: Alternative Label repeatset :)
+                xforms:xhtml-fieldset-and-legend("Alternative Labels", 
+                    (xforms:xf-repeat("skos:altLabel", "altlabel-repeat", xforms:para-with-xf-input((), ".", "span-12", "Alternative Label: ")),
+                        xforms:xhtml-fieldset-and-legend("Add / Remove Alternative Label",
+                            (xforms:xf-add-trigger("add-alt-label", "Add Alternative Label", "skos:altLabel"),
+                            xforms:xf-delete-trigger("delete-alt-label", "Delete Selected Alternative Label", "skos:altLabel", "index('altlabel-repeat')"),
+                            (: below is in for debug purposes.. :)
+                            xforms:debug(xforms:xf-output("index('altlabel-repeat')",  "[Debug]: Selected row ")))
+                        )
+                    )
                 ),
-                xforms:xhtml-fieldset-and-legend("Add / Remove Alternative Label",
-                    (xforms:xf-add-trigger("add-alt-label", "Add Alternative Label", "skos:altLabel"),
-                    xforms:xf-delete-trigger("delete-alt-label", "Delete Selected Alternative Label", "skos:altLabel", "index('altlabel-repeat')"),
-                    (: below is in for debug purposes.. :)
-                    xforms:debug(xforms:xf-output("index('altlabel-repeat')",  "[Debug]: Selected row "))
-                   )
+                (: Hidden Label repeatset :)
+                xforms:xhtml-fieldset-and-legend("Hidden Labels", 
+                    (xforms:xf-repeat("skos:hiddenLabel", "hiddenlabel-repeat", xforms:para-with-xf-input((), ".", "span-12", "Hidden Label: ")),
+                        xforms:xhtml-fieldset-and-legend("Add / Remove Hidden Label",
+                            (xforms:xf-add-trigger("add-hidden-label", "Add Hidden Label", "skos:hiddenLabel"),
+                            xforms:xf-delete-trigger("delete-hidden-label", "Delete Selected Hidden Label", "skos:hiddenLabel", "index('altlhidden-repeat')"),
+                            (: below is in for debug purposes.. :)
+                            xforms:debug(xforms:xf-output("index('hiddenlabel-repeat')",  "[Debug]: Selected row ")))
+                        )
+                    )
                 )
             )
         )
