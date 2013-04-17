@@ -22,8 +22,11 @@ declare function local:create-skos($pref-label as xs:string) as element(skos:Con
     <dct:identifier>GSAFD000042</dct:identifier>
     <dct:identifier>(IlChALCS)GSAFD000042</dct:identifier>
     
-    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:created>
-    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:modified>
+    <workflow>
+        <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:created>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:modified>
+    </workflow>
+    
     <dct:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dct:language>
     <dct:type xml:lang="en">active</dct:type>
     <dct:type xml:lang="en">approved</dct:type>

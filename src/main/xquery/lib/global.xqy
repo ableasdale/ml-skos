@@ -5,8 +5,8 @@ module namespace global="http://www.xmlmachines.com/global";
 declare default element namespace "http://www.w3.org/1999/xhtml";
 declare default function namespace "http://www.w3.org/2005/xpath-functions";
 
-(: declare variable $DEBUG := xdmp:get-request-field("debug", "no"); :) 
-declare variable $DEBUG := xdmp:get-request-field("debug", "yes"); 
+declare variable $DEBUG := xdmp:get-request-field("debug", "no"); 
+(: declare variable $DEBUG := xdmp:get-request-field("debug", "yes"); :) 
 
 (: as element(div)?  :)
 declare function global:handle-message() {
