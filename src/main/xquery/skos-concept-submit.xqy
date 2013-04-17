@@ -34,5 +34,12 @@ let $updated := mem:node-replace($doc//workflow, $workflow)
 return
 
 (: TODO - response content type was "text/html" - not sure what benefit this has for xsltforms? :) 
-(xdmp:document-insert(concat($guid,".xml"), $updated),  xdmp:set-session-field("message", concat($guid,".xml"," has just been created")), xdmp:redirect-response("/"))
-(: (xdmp:document-insert(concat($guid,".xml"), $updated), xdmp:set-response-content-type("application/xml"), concat("<p><strong>saved: ", $guid," ... </strong></p>")) :)
+(
+    xdmp:document-insert(concat($guid,".xml"), $updated),  
+    xdmp:set-session-field("message", concat($guid,".xml"," has just been created")), 
+    xdmp:set-response-content-type("application/xml"),
+    concat("<p><strong>saved: ", $guid," ... </strong></p>")
+)
+(: (xdmp:document-insert(concat($guid,".xml"), $updated), xdmp:set-response-content-type("application/xml"), concat("<p><strong>saved: ", $guid," ... </strong></p>")) 
+, xdmp:redirect-response("/")
+:)

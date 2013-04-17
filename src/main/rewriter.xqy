@@ -19,7 +19,8 @@ declare variable $options as element(rest:options) :=
         </rest:request>
         <rest:request uri="/" endpoint="/xquery/default.xqy"/>
     </rest:options>;
- 
+
+let $_ := xdmp:log(concat("Rewriter :: URI: ", $url))
 let $rewrite := rest:rewrite($options)
 return
 (: TODO - properly handle POSTS in this rewriter so this is no longer necessary :)

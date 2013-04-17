@@ -11,12 +11,13 @@ declare function local:create-database() {
     info:database-create("ML-SKOS", 2)
 };
 
+(: TODO - add rewrite.xqy in here :)
 declare function local:create-application-server() {
     let $config := admin:get-configuration()
     let $config := admin:http-server-create($config, 
         admin:group-get-id($config, "Default"), 
         "http-9994", 
-        "e:\work\ml-skos\src\main\xquery", 
+        "e:\work\ml-skos\src\main\", 
         xs:unsignedLong(9994), 
         0,
         xdmp:database("ML-SKOS")
