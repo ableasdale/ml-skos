@@ -16,7 +16,6 @@ search:search($q,
 	<return-qtext>true</return-qtext>
 	<return-query>true</return-query>
 	<return-results>true</return-results>
-	<return-similar>true</return-similar>
     
     <debug>true</debug>
     
