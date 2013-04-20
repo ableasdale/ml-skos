@@ -4,7 +4,8 @@ xquery version "1.0-ml";
  : Codemirror formatted view of db content 
  :)
 
-import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
+import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy";
+import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
  
 declare boundary-space preserve;
  
@@ -35,7 +36,7 @@ text {'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     </head>
     <body>
         <div class="container">
-            {global:nav($title)}
+            {common:html-page-header($title)}
             <div class="span-24 last">
                 <form action="/xquery/edit.xqy" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <p><textarea rows="10" cols="20" id="code" name="code">{xdmp:quote($doc)}</textarea>

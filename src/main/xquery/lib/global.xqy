@@ -26,9 +26,10 @@ declare private function global:random-hex($seq as xs:integer*) as xs:string+ {
 declare function global:guid() as xs:string {
   fn:string-join(global:random-hex((8,4,4,4,12)),"-")
 };
-(: TODO - refactor XForm (create.xqy) so it doesn't need this :)
+(: TODO - refactor XForm (create.xqy) and view.xqy so it doesn't need this :)
 declare function global:nav($title as xs:string) as element(div) {
 <div id="header">
+    <h1>Remove dependence on this</h1>
     {global:handle-message()}
     <div class="span-12">
         <p><a href="/">Home</a> | <a href="/create/">Create Concept</a></p>

@@ -1,5 +1,6 @@
 xquery version "1.0-ml";
 
+import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
 import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
 import module namespace xforms = "http://www.xmlmachines.com/xforms" at "/xquery/lib/xforms.xqy";
 import module namespace xforms-skos = "http://www.xmlmachines.com/xforms-skos" at "/xquery/lib/xforms-skos.xqy"; 
@@ -43,7 +44,7 @@ xforms:xsltforms-pis(),
     <xhtml:body>
     <xhtml:div class="container">
         <xhtml:div class="span-24 last">
-        {global:nav($title),
+        {common:html-page-header($title),
             xforms:xhtml-fieldset-and-legend("Concept", 
                 (
                 xforms:para-with-xf-input((), "skos:prefLabel", "span-12", "Preferred Label: "),
