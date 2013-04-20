@@ -76,10 +76,7 @@ text {'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         
         <!--
         <link rel="stylesheet" href="/css/codemirror.css" type="text/css" media="screen, projection" />
-        <style type="text/css"><![CDATA[
-        .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
-        .CodeMirror-activeline-background {background: #e8f2ff !important;}
-        ]]></style> -->
+         -->
     </head>
     <body>
         <div class="container">

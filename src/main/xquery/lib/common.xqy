@@ -28,7 +28,7 @@ element div {attribute class{"container"},
 } 
 };   
 
-(: TODO - removed- why can't i use this - as element(div):)
+(: TODO - removed- why can't i use this - $html as element(div):)
 declare function common:build-page($html){
 xdmp:set-response-content-type("text/html; charset=utf-8"),
 '<?xml version="1.0" encoding="UTF-8"?>',
@@ -36,14 +36,13 @@ xdmp:set-response-content-type("text/html; charset=utf-8"),
 common:html-page-enclosure($html)
 };
 
-(:
-(element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"http://www.blueprintcss.org/blueprint/screen.css"}},
-element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
-:)
-(: <link rel="stylesheet" href="/css/codemirror.css" type="text/css" media="screen, projection" /> :)
 declare function common:html-head() {
-(element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"http://www.blueprintcss.org/blueprint/screen.css"}},
-element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
+(element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/blueprint.css"}},
+element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}},
+<style type="text/css"><![CDATA[
+        .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
+        .CodeMirror-activeline-background {background: #e8f2ff !important;}
+        ]]></style>)
 };
 
 declare function common:show-current-user(){
