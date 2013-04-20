@@ -1,8 +1,9 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dct="http://purl.org/dc/terms/"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:wf="http://www.xmlmachines.com/workflow/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#" elementFormDefault="qualified"
     targetNamespace="http://www.w3.org/2004/02/skos/core#">
-    <xs:import namespace="http://purl.org/dc/terms/" schemaLocation="dublin-core.xsd"/>
+    <xs:import namespace="http://www.xmlmachines.com/workflow/" schemaLocation="workflow.xsd"/>
     <xs:element name="concept">
         <xs:complexType>
             <xs:sequence>
@@ -30,12 +31,8 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="note"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="history-note"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="mapping-relation"/>
-                <xs:element minOccurs="0" ref="dct:created"/>
-                <xs:element minOccurs="0" ref="dct:creator"/>
-                <xs:element minOccurs="0" ref="dct:modified"/>
-                <xs:element minOccurs="0" ref="dct:modified-by"/>
-                <xs:element minOccurs="0" ref="dct:language"/>
-            </xs:sequence>
+                <xs:element minOccurs="0" ref="wf:workflow" />
+            </xs:sequence>            
         </xs:complexType>
     </xs:element>
 </xs:schema>
