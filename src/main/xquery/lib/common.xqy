@@ -38,11 +38,7 @@ common:html-page-enclosure($html)
 
 declare function common:html-head() {
 (element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/blueprint.css"}},
-element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}},
-<style type="text/css"><![CDATA[
-        .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
-        .CodeMirror-activeline-background {background: #e8f2ff !important;}
-        ]]></style>)
+element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
 };
 
 declare function common:show-current-user(){

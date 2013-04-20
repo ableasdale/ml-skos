@@ -6,6 +6,10 @@
   font-size: 1.6em;
   height: 400px;
 }
+
+.CodeMirror {border: 1px solid black;}
+.CodeMirror-activeline-background {background: #e8f2ff !important;}
+        
 .CodeMirror-scroll {
   /* Set scrolling behaviour here */
   overflow: auto;
