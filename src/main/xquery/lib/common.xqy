@@ -61,12 +61,15 @@ declare function common:search(){
 };
 
 declare function common:create-navlinks(){
+if (xdmp:get-current-user() ne "nobody")
+then (
 element p { 
     common:create-navlink("/", "Home", false()),
     common:create-navlink("/create/", "Create Concept", false()),
     common:create-navlink("/logout/", "Logout", true())
     
-}  
+})
+else ()
 };
 
 (: TODO - can this be rewritten? :)
@@ -74,9 +77,9 @@ declare function common:handle-message() {
     if (xdmp:get-current-user() eq "nobody")
     then ()
     else (
-    if (string-length(xdmp:get-session-field("message", "")) gt 0)
-    then (xdmp:log("common:handle-message() :: got a message"), <div class="span-24 last info" id="message">{xdmp:get-session-field("message")}</div>, xdmp:set-session-field("message", ""))
-    else ()
+        if (string-length(xdmp:get-session-field("message", "")) gt 0)
+        then (xdmp:log("common:handle-message() :: got a message"), <div class="span-24 last info" id="message">{xdmp:get-session-field("message")}</div>, xdmp:set-session-field("message", ""))
+        else ()
     )
 };
 
@@ -89,13 +92,13 @@ element div {attribute id {"page-header"},
     element hr {},
     (: TODO - make nav conditional :)    
     element div {attribute id {"subheader"}, attribute class {"span-12"}, (common:create-navlinks(), common:show-current-user())},
-    element div {attribute id {"subheader"}, attribute class {"span-12 last"}, common:search()},      
-    element hr {}
+    element div {attribute id {"subheader"}, attribute class {"span-12 last"}, common:search()}      
+    (: element hr {} :) 
 } 
 };
  
 declare function common:html-page-footer() as element(div){
-element div {attribute id {"footer"},   
+element div {attribute id {"footer"}, attribute class {"span-24 last"},  
     element p {attribute align {"center"}, "Application footer"},
     element hr {}
 }   
@@ -109,13 +112,15 @@ element html {attribute lang {"en"}, attribute xml:lang {"en"},
 }
 };
 
-declare function common:login-form() as element(form) {
-element form { attribute method {"post"}, attribute action {"/xquery/login.xqy"},
-    element fieldset {
-        element legend {"Log in"},
-        element p {element label {attribute for {"username"}, "Username: "}, element br {}, element input {attribute class {"title"}, attribute type {"text"}, attribute name {"username"}}},
-        element p {element label {attribute for {"password"}, "Password: "}, element br {}, element input {attribute class {"title"}, attribute type {"password"}, attribute name {"password"}}},
-        element p {element input {attribute type {"submit"}, attribute name {"login"}, attribute value {"Login"}}} 
+declare function common:login-form() as element(div) {
+element div {attribute id {"header"}, attribute class {"span-24 last"},
+    element form { attribute method {"post"}, attribute action {"/xquery/login.xqy"},
+        element fieldset {
+            element legend {"Log in"},
+            element p {element label {attribute for {"username"}, "Username: "}, element br {}, element input {attribute class {"title"}, attribute type {"text"}, attribute name {"username"}}},
+            element p {element label {attribute for {"password"}, "Password: "}, element br {}, element input {attribute class {"title"}, attribute type {"password"}, attribute name {"password"}}},
+            element p {element input {attribute type {"submit"}, attribute name {"login"}, attribute value {"Login"}}} 
+        }
     }
 }
 };

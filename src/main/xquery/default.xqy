@@ -18,22 +18,23 @@ declare option xdmp:output "indent=yes";
 declare variable $title as xs:string := "SKOS Editor: Home";
 
 declare function local:summary(){
-<div class="span-24 last">
-    <p>Recently added/modified terms:</p>
-    <ul>
-        { (: TODO - make this a proper query :)
-        for $i in doc()[1 to 25]
-        order by $i//dct:modified descending
-        return 
-        element li {
-         element a {
-          attribute href {concat("/view/",fn:substring-before(xdmp:node-uri($i), "."))},
-          $i//skos:prefLabel/text() 
-         }
-         }
+    element div {attribute class {"span-24 last"},
+        element fieldset {
+            element legend {"Recently added/modified terms"},
+            element ul {
+                 (: TODO - make this a proper query :)
+                for $i in doc()[1 to 25]
+                order by $i//dct:modified descending
+                return 
+                element li {
+                    element a {
+                     attribute href {concat("/view/",fn:substring-before(xdmp:node-uri($i), "."))},
+                     $i//skos:prefLabel/text() 
+                    }
+                 }
+            }
         }
-    </ul>
-</div>
+    }
 };
 
 
@@ -42,13 +43,14 @@ declare function local:summary(){
 (::::::::::::::::::::::::::)
 
 common:build-page(
-element div {attribute class {"container"},
-    common:html-page-header($title),
-    if (xdmp:get-current-user() eq "nobody")
-    then (common:login-form())
-    else (
-        local:summary(),
-        common:html-page-footer()
-    )
-})
+    element div {attribute class {"container"},
+        common:html-page-header($title),
+        if (xdmp:get-current-user() eq "nobody")
+        then (common:login-form())
+        else (
+            local:summary(),
+            common:html-page-footer()
+        )
+    }
+)
  
