@@ -6,28 +6,29 @@ import module namespace info = "http://marklogic.com/appservices/infostudio"
 import module namespace admin = "http://marklogic.com/xdmp/admin" 
 		  at "/MarkLogic/admin.xqy";
 
+declare variable $config as element(configuration) := admin:get-configuration();
+declare variable $group as xs:unsignedLong := admin:group-get-id($config, "Default");
 
 declare function local:create-database() {
     info:database-create("ML-SKOS", 2)
 };
 
-(: TODO - add rewrite.xqy in here :)
 declare function local:create-application-server() {
-    let $config := admin:get-configuration()
     let $config := admin:http-server-create($config, 
-        admin:group-get-id($config, "Default"), 
+        $group, 
         "http-9994", 
-        "e:\work\ml-skos\src\main\", 
+        "C:\Users\ableasdale\workspace\ml-skos\src\main\",
+        (: "e:\work\ml-skos\src\main\",  :)
         xs:unsignedLong(9994), 
         0,
-        xdmp:database("ML-SKOS")
-        )
+        xdmp:database("ML-SKOS"))
+    let $config := admin:appserver-set-url-rewriter($config, admin:appserver-get-id($config, $group, "http-9994"),
+         "rewriter.xqy")
     return admin:save-configuration($config)
 };
 
 
 declare function local:create-indexes() {
-let $config := admin:get-configuration()
   let $dbid := xdmp:database("ML-SKOS")
   let $rangespec := admin:database-range-element-index("string", "http://www.w3.org/2004/02/skos/core#",
                 "prefLabel", "http://marklogic.com/collation/codepoint",

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://purl.org/dc/terms/"
+    xmlns:dct="http://purl.org/dc/terms/" elementFormDefault="qualified">
+    
+    <xs:element name="created" type="dct:created-type"/>
+    <xs:element name="modified" type="dct:created-type"/>
+    <xs:element name="creator" type="dct:creator-type"/>
+    <xs:element name="modified-by" type="dct:modified-by-type"/>
+    <xs:element name="language" type="dct:language-type"/>
+
+
+    <xs:simpleType name="created-type">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="modified-type">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="creator-type">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="modified-by-type">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="language-type">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+</xs:schema>
