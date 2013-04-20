@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skos:concept xmlns:dct="http://purl.org/dc/terms/" 
+    xmlns:wf="http://www.xmlmachines.com/workflow/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.w3.org/2004/02/skos/core# ../../schemas/skos-db.xsd">
+    
+    <skos:id/>
+    <skos:prefLabel/>
+    <skos:altLabel/>
+    <skos:definition/>
+    <skos:broader/>
+    <skos:narrower/>
+    <skos:related/>
+    <skos:note/>
+    <skos:history-note/>
+    <skos:mapping-relation/>
+
+    <wf:workflow>
+        <dct:created>2006-05-04T18:13:51.0</dct:created>
+        <dct:creator>creator0</dct:creator>
+        <dct:modified>2006-05-04T18:13:51.0</dct:modified>
+        <dct:modified-by>modified-by0</dct:modified-by>
+        <dct:language>eng</dct:language>
+    </wf:workflow>
+</skos:concept>
