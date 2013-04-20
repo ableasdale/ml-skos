@@ -11,7 +11,7 @@ declare option xdmp:output "doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml
 declare option xdmp:output "omit-xml-declaration=yes";
 declare option xdmp:output "indent=yes"; 
 
-declare variable $title := "SKOS Concept Editor";
+declare variable $title := "SKOS Editor: Create Concept";
 (: <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 
 1/2/2013: The blank "_" namespace axis have been added to circumvent a known bug which prevents Firefox from working with instance data containing namespaces 
@@ -75,9 +75,11 @@ xforms:xsltforms-pis(),
             <xf:submit submission="save">
                 <xf:label>Save Concept</xf:label>
             </xf:submit>
+            <!-- TODO - are modal messages supported in XSLTForms? and can xf:output return xhtml?  the response from MarkLogic is.. -->
+            
             <xf:switch>
                 <xf:case id="ready">
-                    <p>Ready ...</p>
+                    <p>Form ready</p>
                     <xf:message level="modal" ev:event="DOMActivate">Ready!</xf:message>
                 </xf:case>
                 <xf:case id="case-busy">
@@ -87,7 +89,7 @@ xforms:xsltforms-pis(),
                     <p>Submit error</p>
                 </xf:case>
                 <xf:case id="case-submit-done">
-                    <!-- TODO - are modal messages supported in XSLTForms? and can xf:output return xhtml?  the response from MarkLogic is.. -->
+                    
                     <xf:message level="modal" ev:event="DOMActivate">Saved</xf:message>
                     <xhtml:p><xf:output value="instance('submit-results')">
                     <xf:label>Output: </xf:label>

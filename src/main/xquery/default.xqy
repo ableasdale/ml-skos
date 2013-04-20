@@ -5,6 +5,7 @@ import module namespace common = "http://www.xmlmachines.com/common" at "/xquery
 
 declare boundary-space preserve;
 
+declare default function namespace "http://www.w3.org/2005/xpath-functions";
 declare default element namespace "http://www.w3.org/1999/xhtml";
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 declare namespace dct="http://purl.org/dc/terms/";

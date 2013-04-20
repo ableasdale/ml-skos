@@ -36,8 +36,14 @@ xdmp:set-response-content-type("text/html; charset=utf-8"),
 common:html-page-enclosure($html)
 };
 
+(:
+(element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"http://www.blueprintcss.org/blueprint/screen.css"}},
+element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
+:)
+(: <link rel="stylesheet" href="/css/codemirror.css" type="text/css" media="screen, projection" /> :)
 declare function common:html-head() {
-element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"http://www.blueprintcss.org/blueprint/screen.css"}}
+(element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"http://www.blueprintcss.org/blueprint/screen.css"}},
+element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
 };
 
 declare function common:show-current-user(){
