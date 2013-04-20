@@ -24,7 +24,7 @@ declare function local:summary(){
             element legend {"Recently added/modified terms"},
             element ul {
                  (: TODO - make this a proper query :)
-                for $i in doc()[1 to 25]
+                let $items := for $i in doc()
                 order by $i//dct:modified descending
                 return 
                 element li {
@@ -33,6 +33,7 @@ declare function local:summary(){
                      $i//skos:prefLabel/text() 
                     }
                  }
+                 return $items[1 to 15]
             }
         }
     }

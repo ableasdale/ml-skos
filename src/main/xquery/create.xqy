@@ -71,7 +71,12 @@ xforms:xsltforms-pis(),
             )
         )}
         
-        
+        <!-- TODO - is this modal message all XSLTForms has to offer??? -->
+         <xf:trigger>
+            <xf:label>Press for a modal message</xf:label>
+            <xf:message level="modal" ev:event="DOMActivate">This is a modal message.</xf:message>
+         </xf:trigger>
+         
             <xf:submit submission="save">
                 <xf:label>Save Concept</xf:label>
             </xf:submit>
@@ -89,8 +94,17 @@ xforms:xsltforms-pis(),
                     <p>Submit error</p>
                 </xf:case>
                 <xf:case id="case-submit-done">
+                    <p>FOOOBARRRRRRRRRRRRRRR!!!!</p>
+                <!-- ev:event="xforms-submit-done"  -->
+                    <xf:load resource="/"/>
+                    <!-- <xf:message level="modal">this</xf:message> -->
+                    <xf:refresh/>
                     
-                    <xf:message level="modal" ev:event="DOMActivate">Saved</xf:message>
+                    <!-- xf:dispatch target="_" name="DOM" ev:event="DOMActivate" >
+		      	       <xf:message level="modal" ev:event="DOMActivate">Saved</xf:message>
+		            </xf:dispatch -->
+                    
+                    
                     <xhtml:p><xf:output value="instance('submit-results')">
                     <xf:label>Output: </xf:label>
                     </xf:output></xhtml:p>

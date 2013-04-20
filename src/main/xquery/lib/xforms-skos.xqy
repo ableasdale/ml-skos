@@ -19,9 +19,12 @@ declare function xforms-skos:base-model() {
             <data xmlns="" />
         </xf:instance>
         
+        <!-- replace="all" kicks over to instance replace -->
         <xf:submission id="save" method="put" replace="instance" instance="submit-results" action="/xquery/skos-concept-submit.xqy" ref="instance('skos')">
             <xf:toggle case="case-busy" ev:event="xforms-submit"></xf:toggle>
-            <xf:toggle case="case-submit-done" ev:event="xforms-submit-done"></xf:toggle>
+            <xf:load ev:event="xforms-submit-done" resource="/" show="replace" /> 
+            <!-- XFSubmission.submit() -->
+            <!-- <xf:toggle case="case-submit-done" ev:event="xforms-submit-done"></xf:toggle> -->
             <xf:toggle case="case-submit-error" ev:event="xforms-submit-error"></xf:toggle>
         </xf:submission>
     </xf:model>

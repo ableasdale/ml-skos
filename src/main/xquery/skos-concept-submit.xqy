@@ -13,6 +13,8 @@ declare namespace rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 declare variable $doc as element(skos:Concept) := xdmp:get-request-body()/node();
 declare variable $guid as xs:string := common:guid();
 
+(: TODO - ensure user is logged in to use this service! :)
+
 declare variable $workflow as element(workflow) :=
     <workflow>
         <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{fn:current-dateTime()}</dct:created>
@@ -37,10 +39,8 @@ return
 (: TODO - response content type was "text/html" - not sure what benefit this has for xsltforms? :) 
 (
     xdmp:document-insert(concat($guid,".xml"), $updated),  
-    xdmp:set-response-content-type("application/xml"),
-    let $_ := xdmp:set-session-field("message", concat($guid,".xml"," has just been created"))
-    return
-    concat("<p><strong>saved: ", $guid," ... </strong></p>") 
+    xdmp:set-response-content-type("text/html"),
+    xdmp:set-session-field("message", concat("The concept: ~",$doc//skos:prefLabel/text(),"~ was created by: ~",xdmp:get-current-user(),"~",$guid))
 )
 (: (xdmp:document-insert(concat($guid,".xml"), $updated), xdmp:set-response-content-type("application/xml"), concat("<p><strong>saved: ", $guid," ... </strong></p>")) 
 , xdmp:redirect-response("/")

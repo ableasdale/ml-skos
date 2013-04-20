@@ -37,8 +37,8 @@ common:html-page-enclosure($html)
 };
 
 declare function common:html-head() {
-(element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/blueprint.css"}},
-element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
+    (element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/blueprint.css"}},
+    element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
 };
 
 declare function common:show-current-user(){
@@ -73,13 +73,21 @@ element p {
 else ()
 };
 
+declare function common:format-message($msg as xs:string) {
+    let $i := fn:tokenize($msg,"~")
+    (: return fn:concat($i[1],"<strong>",$i[2],"</strong>") :)
+    (: $msg :)
+    return 
+    ($i[1], <strong>{$i[2]}</strong>, $i[3], <strong>{$i[4]}</strong>," (",<a href="/view/{$i[5]}">View</a>,")")
+};
+
 (: TODO - can this be rewritten? :)
 declare function common:handle-message() {
     if (xdmp:get-current-user() eq "nobody")
     then ()
     else (
         if (string-length(xdmp:get-session-field("message", "")) gt 0)
-        then (xdmp:log("common:handle-message() :: got a message"), <div class="span-24 last info" id="message">{xdmp:get-session-field("message")}</div>, xdmp:set-session-field("message", ""))
+        then (xdmp:log("common:handle-message() :: got a message"), <div class="span-24 last info" id="message">{common:format-message(xdmp:get-session-field("message"))}</div>, xdmp:set-session-field("message", ""))
         else ()
     )
 };
