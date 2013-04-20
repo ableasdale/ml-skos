@@ -8,6 +8,7 @@ import module namespace admin = "http://marklogic.com/xdmp/admin"
 
 declare variable $config as element(configuration) := admin:get-configuration();
 declare variable $group as xs:unsignedLong := admin:group-get-id($config, "Default");
+declare variable $http-server-name as xs:string := "http-9994";
 
 declare function local:create-database() {
     info:database-create("ML-SKOS", 2)
@@ -16,14 +17,14 @@ declare function local:create-database() {
 declare function local:create-application-server() {
     let $config := admin:http-server-create($config, 
         $group, 
-        "http-9994", 
+        $http-server-name, 
         "C:\Users\ableasdale\workspace\ml-skos\src\main\",
         (: "e:\work\ml-skos\src\main\",  :)
         xs:unsignedLong(9994), 
         0,
         xdmp:database("ML-SKOS"))
-    let $config := admin:appserver-set-url-rewriter($config, admin:appserver-get-id($config, $group, "http-9994"),
-         "rewriter.xqy")
+    let $config := admin:appserver-set-url-rewriter($config, admin:appserver-get-id($config, $group, $http-server-name), "rewriter.xqy")
+    let $config := admin:appserver-set-authentication($config, admin:appserver-get-id($config, $group, $http-server-name), "application-level")
     return admin:save-configuration($config)
 };
 
