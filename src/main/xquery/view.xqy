@@ -10,11 +10,11 @@ import module namespace common = "http://www.xmlmachines.com/common" at "/xquery
 declare boundary-space preserve;
  
 declare default element namespace "http://www.w3.org/1999/xhtml";
+declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 
 declare variable $q as xs:string := concat(xdmp:get-request-field("id"));
 declare variable $doc := doc($q);
-declare variable $title := concat('Viewing Doc: ', $q);
-(: let $_ := xdmp:log(xdmp:get-request-field("id")) :)
+declare variable $title := concat("Viewing XML Data for Concept: '", $doc//skos:prefLabel, "'");
 
 declare function local:codemirror(){
     (<div class="span-24 last">
@@ -22,7 +22,7 @@ declare function local:codemirror(){
             <p><textarea rows="10" cols="20" id="code" name="code">{xdmp:quote($doc)}</textarea>
             <input type="hidden" name="uri" value="{$q}" /></p>
             <p class="prepend-top">    
-                <input type="submit" value="Update Document" />
+                <input type="submit" value="Update Concept" />
             </p>
         </form>
     </div>,
@@ -56,32 +56,3 @@ common:build-page(
         )
     }
 )
-
-
-(:
-
-
-return
-(xdmp:set-response-content-type("text/html; charset=utf-8"),
-text {'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'},
-<html lang="en">
-    <head>
-        <title>{$title}</title>
-        <script type="text/javascript" src="/js/codemirror.js"></script>
-        <script type="text/javascript" src="/js/xml.js"></script>
-        <script type="text/javascript" src="/js/active-line.js"></script>
-        
-        <link rel="stylesheet" href="/css/blueprint.css" type="text/css" media="screen, projection" />
-        
-        <!--
-        <link rel="stylesheet" href="/css/codemirror.css" type="text/css" media="screen, projection" />
-         -->
-    </head>
-    <body>
-        <div class="container">
-            {common:html-page-header($title)}
-        
-        </div>
-    </body>
-</html>) :)
