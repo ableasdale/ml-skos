@@ -14,7 +14,15 @@ declare default function namespace "http://www.w3.org/2005/xpath-functions";
  
 declare function xforms-skos:base-model() {
     <xf:model>
-        <xf:instance id="skos" src="/xml/instance-data/skos-base.xml"/>    
+        {if (string-length(xdmp:get-request-field("id")) gt 1)
+        then (
+        <xf:instance id="skos">
+                {doc(xdmp:get-request-field("id"))}
+        </xf:instance>
+        )
+        else (<xf:instance id="skos" src="/xml/instance-data/skos-base.xml"/>)
+        }
+       
         <xf:instance id="submit-results">
             <data xmlns="" />
         </xf:instance>

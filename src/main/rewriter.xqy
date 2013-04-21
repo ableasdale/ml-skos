@@ -12,6 +12,10 @@ declare variable $options as element(rest:options) :=
     <rest:options>
         <rest:request uri="^/create/$" endpoint="/xquery/create.xqy"></rest:request>
         <rest:request uri="^/logout/$" endpoint="/xquery/logout.xqy"></rest:request>
+        <!-- TODO - rename these modules to make their intent more obvious -->
+        <rest:request uri="^/update/(.+)/?$" endpoint="/xquery/create.xqy">
+            <rest:uri-param name="id">$1.xml</rest:uri-param>
+        </rest:request>
         <rest:request uri="^/view/(.+)/?$" endpoint="/xquery/view.xqy">
             <rest:uri-param name="id">$1.xml</rest:uri-param>
         </rest:request>

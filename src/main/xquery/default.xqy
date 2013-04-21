@@ -30,7 +30,8 @@ declare function local:summary(){
                     element th {"Added"},
                     element th {"Added by"},
                     element th {"Last Modified"},
-                    element th {"Modified by"}
+                    element th {"Modified by"},
+                    element th {"Update Concept"}
                 },
                 (: TODO - write a library like moment.js to display dates in a friendly format (e.g. "just now", "five minutes ago", "2 years ago") AND add classes for colouring based on age :)
                 (: TODO - make this a proper query :)
@@ -42,7 +43,8 @@ declare function local:summary(){
                     element td { attribute class {"date"}, $i/wf:workflow/dct:created/string()},
                     element td {$i/wf:workflow/dct:creator/string()},
                     element td { attribute class {"date"}, $i/wf:workflow/dct:modified/string()},
-                    element td {$i/wf:workflow/dct:modified-by/string()}
+                    element td {$i/wf:workflow/dct:modified-by/string()},
+                    element td { element a {attribute href {concat("/update/", fn:substring-before(xdmp:node-uri($i), "."))}, "Edit ", $i/skos:prefLabel/string()}}
                 }   
             
             }

@@ -12,7 +12,7 @@ declare boundary-space preserve;
 declare default element namespace "http://www.w3.org/1999/xhtml";
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 
-declare variable $q as xs:string := concat(xdmp:get-request-field("id"));
+declare variable $q as xs:string := xdmp:get-request-field("id");
 declare variable $doc := doc($q);
 declare variable $title := concat("Viewing XML Data for Concept: '", $doc//skos:prefLabel, "'");
 
