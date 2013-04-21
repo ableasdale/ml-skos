@@ -39,15 +39,25 @@ declare function local:summary(){
                 return
                 element tr {
                     element td { element a {attribute href {concat("/view/", fn:substring-before(xdmp:node-uri($i), "."))}, $i/skos:prefLabel/string()}},
-                    element td {$i/wf:workflow/dct:created/string()},
+                    element td { attribute class {"date"}, $i/wf:workflow/dct:created/string()},
                     element td {$i/wf:workflow/dct:creator/string()},
-                    element td {$i/wf:workflow/dct:modified/string()},
+                    element td { attribute class {"date"}, $i/wf:workflow/dct:modified/string()},
                     element td {$i/wf:workflow/dct:modified-by/string()}
                 }   
             
             }
         }
-    }
+    },
+    <script type="text/javascript" src="/js/moment.min.js"></script>,
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>,
+    <script type="text/javascript"><![CDATA[
+    $(document).ready(function() {
+        $('.date').each(function (index, dateElem) {
+            var $dateElem = $(dateElem);
+            $dateElem.text(moment.utc($dateElem.text()).fromNow());
+        })
+    });   
+   ]]></script>  
 };
 
 
