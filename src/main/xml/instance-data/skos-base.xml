@@ -6,16 +6,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.w3.org/2004/02/skos/core# ../../schemas/skos-db.xsd">
     
-    <skos:id/>
-    <skos:prefLabel/>
-    <skos:altLabel/>
-    <skos:definition/>
-    <skos:broader/>
-    <skos:narrower/>
-    <skos:related/>
-    <skos:note/>
-    <skos:history-note/>
-    <skos:mapping-relation/>
+    <skos:id>TODO</skos:id>
+    <skos:prefLabel>#</skos:prefLabel>
+    <skos:altLabel>#</skos:altLabel>
+    <skos:altLabel>#</skos:altLabel>
+    <skos:definition>#</skos:definition>
+    <skos:member>#</skos:member>
+    <skos:broader>#</skos:broader>
+    <skos:broader>#</skos:broader>
+    <skos:narrower>#</skos:narrower>
+    <skos:narrower>#</skos:narrower>
+    <skos:related>#</skos:related>
+    <skos:note>#</skos:note>
+    <skos:historyNote>#</skos:historyNote>
+    <skos:mappingRelation>#</skos:mappingRelation>
 
     <wf:workflow>
         <dct:created>2006-05-04T18:13:51.0</dct:created>

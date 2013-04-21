@@ -58,16 +58,42 @@ xforms:xsltforms-pis(),
                         )
                     )
                 ),
-                (: Hidden Label repeatset :)
-                xforms:xhtml-fieldset-and-legend("Hidden Labels", 
-                    (xforms:xf-repeat("skos:hiddenLabel", "hiddenlabel-repeat", xforms:para-with-xf-input((), ".", "span-12 tar", "Hidden Label: ")),
-                        xforms:xhtml-fieldset-and-legend("Add / Remove Hidden Label",
-                            (xforms:xf-add-trigger("add-hidden-label", "Add Hidden Label", "skos:hiddenLabel"),
-                            xforms:xf-delete-trigger("delete-hidden-label", "Delete Selected Hidden Label", "skos:hiddenLabel", "index('hiddenlabel-repeat')"),
-                            xforms:debug(xforms:xf-output("index('hiddenlabel-repeat')",  "[Debug]: Selected row ")))
+                xforms:para-with-xf-input((), "skos:definition", "span-12 tar", "Definition: "),
+                xforms:para-with-xf-input((), "skos:member", "span-12 tar", "Member: "),
+                xforms:xhtml-fieldset-and-legend("Broader Definitions", 
+                    (xforms:xf-repeat("skos:broader", "broader-repeat", xforms:para-with-xf-input((), ".", "span-12 tar", "Broader Definition: ")),
+                        xforms:xhtml-fieldset-and-legend("Add / Remove Broader Definition",
+                            (xforms:xf-add-trigger("add-broader", "Add Broader Definition", "skos:broader"),
+                            xforms:xf-delete-trigger("delete-broader", "Delete Broader Definition", "skos:broader", "index('broader-repeat')"),
+                            xforms:debug(xforms:xf-output("index('broader-repeat')",  "[Debug]: Selected row ")))
                         )
                     )
-                )
+                ),
+
+                xforms:xhtml-fieldset-and-legend("Narrower Definitions", 
+                    (xforms:xf-repeat("skos:narrower", "narrower-repeat", xforms:para-with-xf-input((), ".", "span-12 tar", "Narrower Definition: ")),
+                        xforms:xhtml-fieldset-and-legend("Add / Remove Narrower Definition",
+                            (xforms:xf-add-trigger("add-narrower", "Add Narrower Definition", "skos:narrower"),
+                            xforms:xf-delete-trigger("delete-narrower", "Delete Narrower Definition", "skos:narrower", "index('narrower-repeat')"),
+                            xforms:debug(xforms:xf-output("index('narrower-repeat')",  "[Debug]: Selected row ")))
+                        )
+                    )
+                ),
+                
+                xforms:xhtml-fieldset-and-legend("Related Concepts", 
+                    (xforms:xf-repeat("skos:related", "related-repeat", xforms:para-with-xf-input((), ".", "span-12 tar", "Related Concept: ")),
+                        xforms:xhtml-fieldset-and-legend("Add / Remove Related Concept",
+                            (xforms:xf-add-trigger("add-related", "Add Related Concept", "skos:related"),
+                            xforms:xf-delete-trigger("delete-related", "Delete Related Concept", "skos:related", "index('related-repeat')"),
+                            xforms:debug(xforms:xf-output("index('related-repeat')",  "[Debug]: Selected row ")))
+                        )
+                    )
+                ),
+                (: TODO - RTE :)
+                xforms:para-with-xf-input((), "skos:note", "span-12 tar", "Note: "),
+                xforms:para-with-xf-input((), "skos:historyNote", "span-12 tar", "History note: "),
+                xforms:para-with-xf-input((), "skos:mappingRelation", "span-12 tar", "Mapping relation: ")
+                
             )
         )}
         
