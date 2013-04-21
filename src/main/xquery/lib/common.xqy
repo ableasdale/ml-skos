@@ -96,7 +96,9 @@ declare function common:html-page-header($header as xs:string) as element(div) {
 element div {attribute id {"page-header"},
     common:handle-message(),
     element div {attribute id {"header"}, attribute class {"span-24 last"},
-        element h2 {$header}
+        element h2 {
+            element abbr {attribute title {"Simple Knowledge Organization System"}, "SKOS"},
+                " Editor: ", $header}
     },
     element hr {},
     (: TODO - make nav conditional :)    

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<skos:concept xmlns:dct="http://purl.org/dc/terms/" 
+<skos:Concept xmlns:dct="http://purl.org/dc/terms/" 
     xmlns:wf="http://www.xmlmachines.com/workflow/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
@@ -24,4 +24,4 @@
         <dct:modified-by>modified-by0</dct:modified-by>
         <dct:language>eng</dct:language>
     </wf:workflow>
-</skos:concept>
+</skos:Concept>

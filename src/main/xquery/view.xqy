@@ -13,7 +13,7 @@ declare default element namespace "http://www.w3.org/1999/xhtml";
 
 declare variable $q as xs:string := concat(xdmp:get-request-field("id"));
 declare variable $doc := doc($q);
-declare variable $title := concat('SKOS Editor: viewing doc: ', $q);
+declare variable $title := concat('Viewing Doc: ', $q);
 (: let $_ := xdmp:log(xdmp:get-request-field("id")) :)
 
 declare function local:codemirror(){

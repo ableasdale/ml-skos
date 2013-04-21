@@ -11,7 +11,7 @@ declare option xdmp:output "doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml
 declare option xdmp:output "omit-xml-declaration=yes";
 declare option xdmp:output "indent=yes"; 
 
-declare variable $title := "SKOS Editor: Create Concept";
+declare variable $title := "Create Concept";
 (: <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 
 1/2/2013: The blank "_" namespace axis have been added to circumvent a known bug which prevents Firefox from working with instance data containing namespaces 
@@ -22,7 +22,7 @@ xdmp:set-response-content-type("application/xml"),
 xforms:xsltforms-pis(),
 <xhtml:html
     skos:_="_"
-    
+   
     xmlns="http://www.w3.org/1999/xhtml" 
     xmlns:xf="http://www.w3.org/2002/xforms"      
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -47,10 +47,10 @@ xforms:xsltforms-pis(),
         {common:html-page-header($title),
             xforms:xhtml-fieldset-and-legend("Concept", 
                 (
-                xforms:para-with-xf-input((), "skos:prefLabel", "span-12", "Preferred Label: "),
+                xforms:para-with-xf-input((), "skos:prefLabel", "span-12 tar", "Preferred Label: "),
                 (: Alternative Label repeatset :)
                 xforms:xhtml-fieldset-and-legend("Alternative Labels", 
-                    (xforms:xf-repeat("skos:altLabel", "altlabel-repeat", xforms:para-with-xf-input((), ".", "span-12", "Alternative Label: ")),
+                    (xforms:xf-repeat("skos:altLabel", "altlabel-repeat", xforms:para-with-xf-input((), ".", "span-12 tar", "Alternative Label: ")),
                         xforms:xhtml-fieldset-and-legend("Add / Remove Alternative Label",
                             (xforms:xf-add-trigger("add-alt-label", "Add Alternative Label", "skos:altLabel"),
                             xforms:xf-delete-trigger("delete-alt-label", "Delete Selected Alternative Label", "skos:altLabel", "index('altlabel-repeat')"),
@@ -60,7 +60,7 @@ xforms:xsltforms-pis(),
                 ),
                 (: Hidden Label repeatset :)
                 xforms:xhtml-fieldset-and-legend("Hidden Labels", 
-                    (xforms:xf-repeat("skos:hiddenLabel", "hiddenlabel-repeat", xforms:para-with-xf-input((), ".", "span-12", "Hidden Label: ")),
+                    (xforms:xf-repeat("skos:hiddenLabel", "hiddenlabel-repeat", xforms:para-with-xf-input((), ".", "span-12 tar", "Hidden Label: ")),
                         xforms:xhtml-fieldset-and-legend("Add / Remove Hidden Label",
                             (xforms:xf-add-trigger("add-hidden-label", "Add Hidden Label", "skos:hiddenLabel"),
                             xforms:xf-delete-trigger("delete-hidden-label", "Delete Selected Hidden Label", "skos:hiddenLabel", "index('hiddenlabel-repeat')"),
@@ -71,11 +71,11 @@ xforms:xsltforms-pis(),
             )
         )}
         
-        <!-- TODO - is this modal message all XSLTForms has to offer??? -->
+        <!-- TODO - is this modal message all XSLTForms has to offer??? 
          <xf:trigger>
             <xf:label>Press for a modal message</xf:label>
             <xf:message level="modal" ev:event="DOMActivate">This is a modal message.</xf:message>
-         </xf:trigger>
+         </xf:trigger> -->
          
             <xf:submit submission="save">
                 <xf:label>Save Concept</xf:label>
@@ -94,7 +94,6 @@ xforms:xsltforms-pis(),
                     <p>Submit error</p>
                 </xf:case>
                 <xf:case id="case-submit-done">
-                    <p>FOOOBARRRRRRRRRRRRRRR!!!!</p>
                 <!-- ev:event="xforms-submit-done"  -->
                     <xf:load resource="/"/>
                     <!-- <xf:message level="modal">this</xf:message> -->

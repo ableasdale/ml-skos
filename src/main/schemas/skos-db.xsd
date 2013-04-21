@@ -4,7 +4,7 @@
     xmlns:skos="http://www.w3.org/2004/02/skos/core#" elementFormDefault="qualified"
     targetNamespace="http://www.w3.org/2004/02/skos/core#">
     <xs:import namespace="http://www.xmlmachines.com/workflow/" schemaLocation="workflow.xsd"/>
-    <xs:element name="concept">
+    <xs:element name="Concept">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="id">

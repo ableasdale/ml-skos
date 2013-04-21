@@ -16,7 +16,7 @@ declare option xdmp:output "doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml
 declare option xdmp:output "omit-xml-declaration=yes";
 declare option xdmp:output "indent=yes"; 
   
-declare variable $title as xs:string := "SKOS Editor: Home";
+declare variable $title as xs:string := "Home";
 
 declare function local:summary(){
     element div {attribute class {"span-24 last"},
