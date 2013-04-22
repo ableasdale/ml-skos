@@ -13,14 +13,23 @@ declare default element namespace "http://www.w3.org/1999/xhtml";
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 
 declare variable $q as xs:string := xdmp:get-request-field("id");
-declare variable $doc := doc($q);
+
+declare variable $doc := xdmp:tidy(xdmp:quote(doc($q)), 
+    <options xmlns="xdmp:tidy">
+        <show-warnings>no</show-warnings>
+        <input-xml>yes</input-xml>
+        <output-xml>yes</output-xml>
+        <indent>auto</indent>
+    </options>);
+    
 declare variable $title := concat("Viewing XML Data for Concept: '", $doc//skos:prefLabel, "'");
 
+(:  accept-charset="utf-8" enctype="multipart/form-data"> :)
 declare function local:codemirror(){
     (<div class="span-24 last">
-        <form action="/xquery/edit.xqy" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-            <p><textarea rows="10" cols="20" id="code" name="code">{xdmp:quote($doc)}</textarea>
-            <input type="hidden" name="uri" value="{$q}" /></p>
+        <form action="/test/{fn:substring-before($q, ".")}" method="post">
+            <p><textarea rows="10" cols="20" id="code" name="code">{$doc[2]}</textarea>
+            <input type="hidden" name="id" value="{$q}" /></p>
             <p class="prepend-top">    
                 <input type="submit" value="Update Concept" />
             </p>

@@ -9,21 +9,32 @@ declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 declare namespace dct="http://purl.org/dc/terms/";
 declare namespace wf="http://www.xmlmachines.com/workflow/";
 
-declare variable $uri as xs:string := xdmp:get-request-field("uri");
-declare variable $doc as element(skos:Concept) := xdmp:unquote( xdmp:get-request-field("code"), (), ("format-xml"))/node();
+declare variable $uri as xs:string := 
+if (string-length(xdmp:get-request-field("id")) gt 1)
+then (xdmp:log("Have a URI"), xdmp:get-request-field("id"))
+else (xdmp:log("No URI"), xdmp:get-request-url());
+
+declare variable $doc as element(skos:Concept) := 
+if (exists(xdmp:get-request-body()/node()))
+then (xdmp:log("edit.xqy: should have a request-body - should be an XForm submit."), xdmp:get-request-body()/node())
+else (xdmp:log("edit.xqy: should NOT have a request-body - likely referrer was the view page."), xdmp:unquote( xdmp:get-request-field("code"), (), ("format-xml"))/node() );
 
 declare variable $original-workflow as element(wf:workflow) := $doc//wf:workflow;
+
 declare variable $updated-workflow as element(wf:workflow) :=
-<wf:workflow>
-        {$original-workflow/dct:created},
-        {$original-workflow/dct:creator},
-        <dct:modified>{fn:current-dateTime()}</dct:modified>
-        <dct:modified-by>{xdmp:get-current-user()}</dct:modified-by>
-        {$original-workflow/dct:language}
-    </wf:workflow>;
+element wf:workflow {
+    $original-workflow/dct:created,
+    $original-workflow/dct:creator,
+    element dct:modified {fn:current-dateTime()},
+    element dct:modified-by {xdmp:get-current-user()},    
+    $original-workflow/dct:language
+};
 
 let $_ := xdmp:log("edit.xqy")
 let $updated := mem:node-replace($doc//wf:workflow, $updated-workflow)
 return
 
-(xdmp:document-insert($uri, $updated),  xdmp:set-session-field("message", concat($uri," has just been updated")), xdmp:redirect-response("/"))
+(xdmp:document-insert($uri, $updated), 
+xdmp:set-response-content-type("text/html"),
+xdmp:set-session-field("message", concat("The concept: ~",$doc//skos:prefLabel/text(),"~ was updated by: ~",xdmp:get-current-user(),"~",fn:substring-before($uri, ".")))
+)
