@@ -10,34 +10,34 @@ declare option xdmp:mapping "false";
 declare variable $url as xs:string := xdmp:get-request-url();
 declare variable $options as element(rest:options) :=
     <rest:options>
-        <rest:request uri="^/test/$" endpoint="/xquery/logout.xqy"></rest:request>
-        
-        
         <rest:request uri="^/create/$" endpoint="/xquery/create.xqy"></rest:request>
         <rest:request uri="^/logout/$" endpoint="/xquery/logout.xqy"></rest:request>
         
-        <!-- TODO - rename these modules to make their intent more obvious -->
+        <!-- view.xqy startpoint -->
         <rest:request uri="^/save/(.+)/?$" endpoint="/xquery/edit.xqy">
             <rest:uri-param name="id">$1.xml</rest:uri-param>
+            <rest:param name="code"/>
             <rest:http method="POST"/>
-            <rest:http method="GET"/>
+            <rest:accept>text/html</rest:accept>
+        </rest:request>
+        
+        <!-- XSLTForms startpoint -->
+         <rest:request uri="^/save/(.+)/?$" endpoint="/xquery/edit.xqy">
+            <rest:uri-param name="id">$1.xml</rest:uri-param>
             <rest:http method="PUT"/>
         </rest:request>
-        <rest:request uri="^/update/(.+)/?$" endpoint="/xquery/create.xqy">
-            <rest:uri-param name="id">$1.xml</rest:uri-param>
-        </rest:request>
+        
         <rest:request uri="^/view/(.+)/?$" endpoint="/xquery/view.xqy">
             <rest:uri-param name="id">$1.xml</rest:uri-param>
         </rest:request>
+                    
+        <rest:request uri="^/update/(.+)/?$" endpoint="/xquery/create.xqy">
+            <rest:uri-param name="id">$1.xml</rest:uri-param>
+        </rest:request>
+        
         <rest:request uri="^/search/(.+)/?$" endpoint="/xquery/search.xqy">
             <rest:uri-param name="q">$1</rest:uri-param>
         </rest:request>
-        
-        
-        <rest:request uri="^/test/$" endpoint="/xquery/test.xqy">
-            <rest:http method="POST"/>
-        </rest:request>
-        
         
         <rest:request uri="/" endpoint="/xquery/default.xqy"/>
     </rest:options>;
@@ -45,17 +45,18 @@ declare variable $options as element(rest:options) :=
 let $_ := xdmp:log("############### START ##################")
 let $_ := xdmp:log(concat("Rewriter :: URI: ", $url))
 
-(:
+(: debug below:
 let $k := rest:get-raw-query-params()
-let $_ := for $x in map:keys($k)
+let $_ := for $x in map:keys($k) 
 return xdmp:log(concat("key: ", $x, " val: ", map:get($k, $x)))
+let $_ := xdmp:log("i will accept")
+let $_ := xdmp:log(rest:get-acceptable-types(xdmp:get-request-header("Accept")))
 :)
-
 let $rewrite := rest:rewrite($options)
 let $_ := xdmp:log(concat("Rewriter :: Rewriting to: ", $rewrite))
 let $_ := xdmp:log("############### END ##################")
 return
-(: TODO - properly handle POSTS in this rewriter so this is no longer necessary :)
+(: TODO - properly handle remaining POSTS in this rewriter so the below /xquery/* matches are no longer necessary :)
 if (starts-with($url, "/xml/") or 
     starts-with($url, "/xsltforms/") or 
     starts-with($url, "/css/") or 

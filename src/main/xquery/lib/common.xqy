@@ -30,7 +30,7 @@ element div {attribute class{"container"},
 
 (: TODO - removed- why can't i use this - $html as element(div):)
 declare function common:build-page($html){
-xdmp:set-response-content-type("text/html; charset=utf-8"),
+xdmp:set-response-content-type("text/html"), xdmp:set-response-encoding("utf-8"),
 '<?xml version="1.0" encoding="UTF-8"?>',
 '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
 common:html-page-enclosure($html)

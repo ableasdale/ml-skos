@@ -15,9 +15,9 @@ then (xdmp:log("Have a URI"), xdmp:get-request-field("id"))
 else (xdmp:log("No URI"), xdmp:get-request-url());
 
 declare variable $doc as element(skos:Concept) := 
-if (exists(xdmp:get-request-body()/node()))
-then (xdmp:log("edit.xqy: should have a request-body - should be an XForm submit."), xdmp:get-request-body()/node())
-else (xdmp:log("edit.xqy: should NOT have a request-body - likely referrer was the view page."), xdmp:unquote( xdmp:get-request-field("code"), (), ("format-xml"))/node() );
+if (exists(xdmp:get-request-field("code")))
+then (xdmp:log("edit.xqy: should NOT have a request-body - likely referrer was the view page."), xdmp:unquote( xdmp:get-request-field("code"), (), ("format-xml"))/node() )
+else (xdmp:log("edit.xqy: should have a request-body - should be an XForm submit."), xdmp:get-request-body()/node());
 
 declare variable $original-workflow as element(wf:workflow) := $doc//wf:workflow;
 
@@ -36,5 +36,6 @@ return
 
 (xdmp:document-insert($uri, $updated), 
 xdmp:set-response-content-type("text/html"),
-xdmp:set-session-field("message", concat("The concept: ~",$doc//skos:prefLabel/text(),"~ was updated by: ~",xdmp:get-current-user(),"~",fn:substring-before($uri, ".")))
+xdmp:set-session-field("message", concat("The concept: ~",$doc//skos:prefLabel/text(),"~ was updated by: ~",xdmp:get-current-user(),"~",fn:substring-before($uri, "."))),
+if (exists(xdmp:get-request-field("code"))) then(xdmp:redirect-response("/")) else()
 )
