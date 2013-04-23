@@ -22,4 +22,5 @@ $(function() {
         }
     });    
     $("#searchbox").focus();
+    $("search\\:highlight").css('background-color', 'yellow');
 }); 

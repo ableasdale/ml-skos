@@ -1,10 +1,7 @@
 xquery version "1.0-ml"; 
 
-import module namespace info = "http://marklogic.com/appservices/infostudio"  
-      at "/MarkLogic/appservices/infostudio/info.xqy";
-
-import module namespace admin = "http://marklogic.com/xdmp/admin" 
-		  at "/MarkLogic/admin.xqy";
+import module namespace info = "http://marklogic.com/appservices/infostudio" at "/MarkLogic/appservices/infostudio/info.xqy";
+import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic/admin.xqy";
 
 declare variable $config as element(configuration) := admin:get-configuration();
 declare variable $group as xs:unsignedLong := admin:group-get-id($config, "Default");
@@ -30,11 +27,11 @@ declare function local:create-application-server() {
 
 
 declare function local:create-indexes() {
-  let $dbid := xdmp:database("ML-SKOS")
-  let $rangespec := admin:database-range-element-index("string", "http://www.w3.org/2004/02/skos/core#",
-                "prefLabel", "http://marklogic.com/collation/codepoint",
-		fn:false() )
-let $config := admin:database-add-range-element-index($config, $dbid, $rangespec)
+let $dbid := xdmp:database("ML-SKOS")                
+let $config := admin:database-add-range-element-index($config, $dbid, admin:database-range-element-index("string", "http://www.w3.org/2004/02/skos/core#", "prefLabel", "http://marklogic.com/collation/codepoint", fn:false() ))
+let $config := admin:database-add-range-element-index($config, $dbid, admin:database-range-element-index("string", "http://www.w3.org/2004/02/skos/core#", "narrower", "http://marklogic.com/collation/codepoint", fn:false() ))
+let $config := admin:database-add-range-element-index($config, $dbid, admin:database-range-element-index("string", "http://www.w3.org/2004/02/skos/core#", "broader", "http://marklogic.com/collation/codepoint", fn:false() ))
+let $config := admin:database-add-range-element-index($config, $dbid, admin:database-range-element-index("string", "http://www.w3.org/2004/02/skos/core#", "related", "http://marklogic.com/collation/codepoint", fn:false() ))
 let $config := admin:save-configuration($config)
 return $config
 };
