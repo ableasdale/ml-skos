@@ -30,14 +30,15 @@ element div {attribute class{"container"},
 
 (: TODO - removed- why can't i use this - $html as element(div):)
 declare function common:build-page($html){
-xdmp:set-response-content-type("text/html"), xdmp:set-response-encoding("utf-8"),
-'<?xml version="1.0" encoding="UTF-8"?>',
-'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
-common:html-page-enclosure($html)
+    xdmp:set-response-content-type("text/html"), xdmp:set-response-encoding("utf-8"),
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
+    common:html-page-enclosure($html)
 };
 
 declare function common:html-head() {
     (element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/blueprint.css"}},
+    element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"}}, 
     element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
 };
 
@@ -55,9 +56,13 @@ declare function common:create-navlink($href as xs:string, $name as xs:string, $
 };
 
 declare function common:search(){
-<form action="/xquery/search.xqy" method="post" class="inline right">
-    <p><input type="text" name="q" value="Search" />{"  "}
-    <input type="submit" name="go" value="go" /></p>
+<form action="/xquery/search.xqy" method="post" class="inline right">    
+    <div class="ui-widget">
+        <label for="searchbox">Search: </label>
+        <input id="searchbox" />
+    </div>
+
+    <!-- input type="submit" name="go" value="go" / -->
 </form>
 };
 
@@ -110,6 +115,7 @@ element div {attribute id {"page-header"},
  
 declare function common:html-page-footer() as element(div){
 element div {attribute id {"footer"}, attribute class {"span-24 last"},  
+    element hr {},
     element p {attribute align {"center"}, "Application footer"},
     element hr {}
 }   
@@ -134,6 +140,13 @@ element div {attribute id {"header"}, attribute class {"span-24 last"},
         }
     }
 }
+};
+
+declare function common:check-entitlement-then-do($tasks) as item()* {
+        (if (xdmp:get-current-user() eq "nobody")
+        then (common:login-form())
+        else ($tasks),
+        common:html-page-footer())
 };
 
 declare private function common:random-hex($seq as xs:integer*) as xs:string+ {

@@ -52,12 +52,17 @@ declare function local:summary(){
     },
     <script type="text/javascript" src="/js/moment.min.js"></script>,
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>,
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>,
     <script type="text/javascript"><![CDATA[
-    $(document).ready(function() {
+    $(function() {
         $('.date').each(function (index, dateElem) {
             var $dateElem = $(dateElem);
             $dateElem.text(moment.utc($dateElem.text()).fromNow());
-        })
+        });
+        $("#searchbox").autocomplete({
+            source: "/xquery/suggest.xqy",
+            minLength: 2
+         });
     });   
    ]]></script>  
 };
@@ -70,12 +75,7 @@ declare function local:summary(){
 common:build-page(
     element div {attribute class {"container"},
         common:html-page-header($title),
-        if (xdmp:get-current-user() eq "nobody")
-        then (common:login-form())
-        else (
-            local:summary(),
-            common:html-page-footer()
-        )
+        common:check-entitlement-then-do(local:summary())
     }
 )
  
