@@ -35,9 +35,11 @@ declare function local:summary(){
                 },
                 (: TODO - write a library like moment.js to display dates in a friendly format (e.g. "just now", "five minutes ago", "2 years ago") AND add classes for colouring based on age :)
                 (: TODO - make this a proper query :)
-                for $i in (/skos:Concept)
+                for $i at $x in (/skos:Concept)
+                where ($x < 15)   
                 order by $i//dct:modified descending
                 return
+                (
                 element tr {
                     element td { element a {attribute href {concat("/view/", fn:substring-before(xdmp:node-uri($i), "."))}, $i/skos:prefLabel/string()}},
                     element td { attribute class {"date"}, $i/wf:workflow/dct:created/string()},
@@ -45,8 +47,7 @@ declare function local:summary(){
                     element td { attribute class {"date"}, $i/wf:workflow/dct:modified/string()},
                     element td {$i/wf:workflow/dct:modified-by/string()},
                     element td { element a {attribute href {concat("/update/", fn:substring-before(xdmp:node-uri($i), "."))}, "Edit ", $i/skos:prefLabel/string()}}
-                }   
-            
+                })       
             }
         }
     }
