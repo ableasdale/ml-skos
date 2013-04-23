@@ -1,8 +1,19 @@
 $(function() {
-    $('.date').each(function (index, dateElem) {
-        var $dateElem = $(dateElem);
-        $dateElem.text(moment.utc($dateElem.text()).fromNow());
+    // Initialise search
+    var request = $.ajax({
+        url : "/xquery/populate.xqy",
+        type : "get",
+        dataType : "html"
+     });
+    request.done(function (response, textStatus, jqXHR) {
+        $("#recent-concepts-table > tbody").html(response);
+        $('.date').each(function (index, dateElem) {
+            var $dateElem = $(dateElem);
+            $dateElem.text(moment.utc($dateElem.text()).fromNow());
+        });
     });
+
+    
     $("#searchbox").autocomplete({
         source: "/xquery/suggest.xqy",
         minLength: 2
@@ -20,7 +31,32 @@ $(function() {
             if(keycode == '13') {
             $("#searchform").submit();    
         }
-    });    
+    });  
+       
+    $('.pagination').jqPagination({
+        /* TODO - compute this value from total Concepts */
+        max_page : 144, /* Math.ceil($("p.quiet") / 20), */
+        paged: function(page) {
+      
+            var request = $.ajax({
+                url : "/xquery/populate.xqy?p=" + page,
+                type : "get",
+                dataType : "html"
+            /*    success: function(respose, textStatus, jqXHR) {console.log(response)} */
+            });
+        
+            request.done(function (response, textStatus, jqXHR) {
+            
+            $("#recent-concepts-table > tbody").html(response);
+            $('.date').each(function (index, dateElem) {
+                var $dateElem = $(dateElem);
+                $dateElem.text(moment.utc($dateElem.text()).fromNow());
+            });
+        });
+        
+        
+        }
+});
     $("#searchbox").focus();
     $("search\\:highlight").css('background-color', 'yellow');
 }); 

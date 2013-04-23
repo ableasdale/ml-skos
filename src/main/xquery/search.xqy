@@ -66,7 +66,7 @@ declare variable $search := search:search($q,
 		  <facet-option>frequency-order</facet-option>
 		  <facet-option>descending</facet-option>
 		  <facet-option>limit=10</facet-option>
-		  <element ns="http://www.w3.org/2004/02/skos/core#" name="narrower"/>
+		  <element ns="http://www.w3.org/2004/02/skos/core#" name="broader"/>
 		</range>
 	</constraint>
 	
@@ -75,7 +75,7 @@ declare variable $search := search:search($q,
 		  <facet-option>frequency-order</facet-option>
 		  <facet-option>descending</facet-option>
 		  <facet-option>limit=10</facet-option>
-		  <element ns="http://www.w3.org/2004/02/skos/core#" name="narrower"/>
+		  <element ns="http://www.w3.org/2004/02/skos/core#" name="related"/>
 		</range>
 	</constraint>
 
@@ -114,9 +114,11 @@ declare function local:search-results(){
     <div>{local:process-results($search/search:result)}</div>
     <div>{local:process-facets()}</div>
     <textarea>{$search}</textarea>
-    <p>Good test search terms</p>
+    <p>Good test search terms:</p>
     <ul>
-        <li>star</li>
+        <li><a href="/search/star">star</a></li>
+        <li><a href="/search/cluster">cluster</a></li>
+        <li><a href="/search/system">system</a></li>
     </ul>
 </div>
 };

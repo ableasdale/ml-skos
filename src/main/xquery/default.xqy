@@ -24,31 +24,32 @@ declare function local:summary(){
         element fieldset {
             element legend {"Recently Added / Modified Concepts:"},
             element p {element strong {attribute class {"quiet"}, xdmp:estimate(/skos:Concept)}, " Concept(s) defined"},
-            element table {
-                element tr {
-                    element th {"Concept Name"},
-                    element th {"Added"},
-                    element th {"Added by"},
-                    element th {"Last Modified"},
-                    element th {"Modified by"},
-                    element th {"Update Concept"}
+            element table { attribute id {"recent-concepts-table"},
+                element thead {
+                    element tr {
+                        element th {"Concept Name"},
+                        element th {"Added"},
+                        element th {"Added by"},
+                        element th {"Last Modified"},
+                        element th {"Modified by"},
+                        element th {"Update Concept"}
+                    }
                 },
-                (: TODO - write a library like moment.js to display dates in a friendly format (e.g. "just now", "five minutes ago", "2 years ago") AND add classes for colouring based on age :)
-                (: TODO - make this a proper query :)
-                for $i at $x in (/skos:Concept)
-                where ($x < 15)   
-                order by $i//dct:modified descending
-                return
-                (
-                element tr {
-                    element td { element a {attribute href {concat("/view/", fn:substring-before(xdmp:node-uri($i), "."))}, $i/skos:prefLabel/string()}},
-                    element td { attribute class {"date"}, $i/wf:workflow/dct:created/string()},
-                    element td {$i/wf:workflow/dct:creator/string()},
-                    element td { attribute class {"date"}, $i/wf:workflow/dct:modified/string()},
-                    element td {$i/wf:workflow/dct:modified-by/string()},
-                    element td { element a {attribute href {concat("/update/", fn:substring-before(xdmp:node-uri($i), "."))}, "Edit ", $i/skos:prefLabel/string()}}
-                })       
-            }
+                element tbody {
+                    element tr {
+                        element td {attribute colspan {"6"}, "Loading.."}
+                    }
+                }
+            },
+                
+            <div class="pagination">
+                <a href="#" class="first" data-action="first">&laquo;</a>
+                <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+                <input type="text" readonly="readonly" data-max-page="40" />
+                <a href="#" class="next" data-action="next">&rsaquo;</a>
+                <a href="#" class="last" data-action="last">&raquo;</a>
+            </div>
+            
         }
     }
 };
