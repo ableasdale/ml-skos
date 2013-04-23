@@ -49,22 +49,7 @@ declare function local:summary(){
             
             }
         }
-    },
-    <script type="text/javascript" src="/js/moment.min.js"></script>,
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>,
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>,
-    <script type="text/javascript"><![CDATA[
-    $(function() {
-        $('.date').each(function (index, dateElem) {
-            var $dateElem = $(dateElem);
-            $dateElem.text(moment.utc($dateElem.text()).fromNow());
-        });
-        $("#searchbox").autocomplete({
-            source: "/xquery/suggest.xqy",
-            minLength: 2
-         });
-    });   
-   ]]></script>  
+    }
 };
 
 

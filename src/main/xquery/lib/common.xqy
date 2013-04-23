@@ -37,9 +37,16 @@ declare function common:build-page($html){
 };
 
 declare function common:html-head() {
-    (element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/blueprint.css"}},
+    (
+    element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/application.css"}},
+    element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/blueprint.css"}},
     element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"}}, 
-    element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}})
+    element link {attribute rel {"stylesheet"}, attribute type{"text/css"}, attribute href {"/css/codemirror.css"}},
+    element script {attribute type {"text/javascript"}, attribute src {"/js/moment.min.js"}, " "},
+    element script {attribute src {"//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"}, " "},
+    element script {attribute src {"//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"}, " "},
+    element script {attribute type {"text/javascript"}, attribute src {"/js/controller.js"}, " "}
+    )
 };
 
 declare function common:show-current-user(){

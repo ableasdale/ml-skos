@@ -60,7 +60,8 @@ return
 if (starts-with($url, "/xml/") or 
     starts-with($url, "/xsltforms/") or 
     starts-with($url, "/css/") or 
-    starts-with($url, "/js/") or 
+    starts-with($url, "/js/") or
+    starts-with($url, "/images/") or 
     starts-with($url, "/xquery/search.xqy") or
     starts-with($url, "/xquery/suggest.xqy") or 
     starts-with($url, "/xquery/skos-concept-submit.xqy") or 
