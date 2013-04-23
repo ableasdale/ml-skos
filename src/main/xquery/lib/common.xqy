@@ -63,13 +63,12 @@ declare function common:create-navlink($href as xs:string, $name as xs:string, $
 };
 
 declare function common:search(){
-<form action="/xquery/search.xqy" method="post" class="inline right">    
+<form id="searchform" action="/xquery/search.xqy" method="post" class="inline right">    
     <div class="ui-widget">
         <label for="searchbox">Search: </label>
-        <input id="searchbox" />
+        <input id="searchbox" name="q" />&nbsp;
+        <input id="search-go" type="submit" name="go" value="go" />    
     </div>
-
-    <!-- input type="submit" name="go" value="go" / -->
 </form>
 };
 
