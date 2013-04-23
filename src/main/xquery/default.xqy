@@ -23,7 +23,7 @@ declare function local:summary(){
     element div {attribute class {"span-24 last"},
         element fieldset {
             element legend {"Recently Added / Modified Concepts:"},
-            
+            element p {element strong {attribute class {"quiet"}, xdmp:estimate(/skos:Concept)}, " Concept(s) defined"},
             element table {
                 element tr {
                     element th {"Concept Name"},

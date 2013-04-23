@@ -9,14 +9,17 @@ $(function() {
      });
     $("#search-go" )
         .button()
+        .click(function( event ) {
+        /*event.preventDefault(); */
+            $("#searchform").submit();
+    });
+    
+    $("#search-go" )
         .keypress(function(event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '13') {
             $("#searchform").submit();    
         }
-        .click(function( event ) {
-        /*event.preventDefault(); */
-            $("#searchform").submit();
-    });
+    });    
     $("#searchbox").focus();
 }); 

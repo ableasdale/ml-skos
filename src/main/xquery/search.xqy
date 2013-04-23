@@ -3,7 +3,7 @@ xquery version "1.0-ml";
 import module namespace search = "http://marklogic.com/appservices/search"
      at "/MarkLogic/appservices/search/search.xqy";
 
-declare variable $q as xs:string := xdmp:get-request-field("q", "fiction");
+declare variable $q as xs:string := xdmp:get-request-field("q", "");
 
 search:search($q,
 
