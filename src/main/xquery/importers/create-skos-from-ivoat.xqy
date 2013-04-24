@@ -1,6 +1,7 @@
 xquery version "1.0-ml";
 
 import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy"; 
+import module namespace wikipedia-enrichment = "http://www.xmlmachines.com/wikipedia-enrichment" at "/xquery/lib/wikipedia-enrichment.xqy";
 
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 declare namespace dct="http://purl.org/dc/terms/";
@@ -47,5 +48,6 @@ concat(common:guid(),".xml"),
   then (element {fn:name($item)} {replace($item/@rdf:resource/data(),"#","")})
   else ($item)
   return $item,
+  element skos:mappingRelation {wikipedia-enrichment:create-wikipedia-link($i/skos:prefLabel/text())},
   local:workflow()}
 </skos:Concept>)
