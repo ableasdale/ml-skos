@@ -124,7 +124,7 @@ element div {attribute id {"page-header"},
 declare function common:html-page-footer() as element(div){
 element div {attribute id {"footer"}, attribute class {"span-24 last"},  
     element hr {},
-    element p {attribute align {"center"}, "Application footer"},
+    element p {attribute align {"center"}, "MarkLogic SKOS Concept Editor - MMXIII"},
     element hr {}
 }   
 }; 

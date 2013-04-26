@@ -23,4 +23,3 @@ declare function wikipedia-enrichment:create-wikipedia-link($prefLabel-text as x
   let $string := replace($string," ", "_")
   return concat ("http://en.wikipedia.org/wiki/", $string)
 };
-

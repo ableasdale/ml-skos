@@ -119,6 +119,7 @@ declare function local:search-results(){
         <li><a href="/search/star">star</a></li>
         <li><a href="/search/cluster">cluster</a></li>
         <li><a href="/search/system">system</a></li>
+        <li><a href="/search/mirror">mirror</a></li>
     </ul>
 </div>
 };
