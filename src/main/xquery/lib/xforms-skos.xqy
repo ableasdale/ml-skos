@@ -41,12 +41,21 @@ declare function xforms-skos:base-model() {
      
     <!-- Nodeset bindings for TinyMCE editor -->
     <xf:bind nodeset="//skos:note" type="rte:standardHTML" />
-    <xf:bind nodeset="instance('rich-text')" type="rte:standardHTML" />
 
         {if (string-length(xdmp:get-request-field("id")) gt 1)
         then (
         <xf:instance id="skos">
-                {doc(xdmp:get-request-field("id"))}
+                { 
+                    element skos:Concept {
+                        for $x in doc(xdmp:get-request-field("id"))/skos:Concept/*
+                        return 
+                        if (fn:name($x) eq "skos:note")
+                        then (xdmp:log("we got a skos note"), element skos:note {xdmp:quote($x)})
+                        else ($x)
+                        
+                    }
+                
+                }
         </xf:instance>
         )
         else (<xf:instance id="skos" src="/xml/instance-data/skos-base.xml"/>)
@@ -55,14 +64,7 @@ declare function xforms-skos:base-model() {
         <xf:instance id="submit-results">
             <data xmlns="" />
         </xf:instance>
-        
-        <xf:instance id="rich-text">
-            <skos:note>
-                {xdmp:quote(doc()[1]//skos:note)}
-           </skos:note>
-        </xf:instance>
-       
-       
+   
         {if (string-length(xdmp:get-request-field("id")) gt 1)
         then (
          <xf:submission id="save" method="put" replace="instance" instance="submit-results" action="/save/{fn:substring-before(xdmp:get-request-field("id"), ".")}" ref="instance('skos')">
