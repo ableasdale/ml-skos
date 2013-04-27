@@ -90,7 +90,9 @@ xforms:xsltforms-pis(),
                     )
                 ),
                 (: TODO - RTE :)
-                xforms:para-with-xf-input((), "skos:note", "span-12 tar", "Note: "),
+                xforms:html-textarea("skos:note"),
+                
+                (: xforms:para-with-xf-input((), "skos:note", "span-12 tar", "Note: "), ":)
                 xforms:para-with-xf-input((), "skos:historyNote", "span-12 tar", "History note: "),
                 xforms:para-with-xf-input((), "skos:mappingRelation", "span-12 tar", "Mapping relation: ")
                 
