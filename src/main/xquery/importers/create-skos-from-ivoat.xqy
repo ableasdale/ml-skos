@@ -23,7 +23,7 @@ declare function local:get-node-at($i) as element(skos:Concept){
 };
 
 declare variable $master  := 
-xdmp:document-get("file://C:/Users/ableasdale/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",
+xdmp:document-get("file://C:/Users/Alex/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",
     <options xmlns="xdmp:document-get" xmlns:http="xdmp:http">
         <format>xml</format>
     </options>
@@ -33,7 +33,9 @@ for $i in ($master//skos:Concept)[1 to 50]
 return 
 xdmp:document-insert(
 concat(common:guid(),".xml"),
-<skos:Concept>
+<skos:Concept 
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:wf="http://www.xmlmachines.com/workflow/">
   {for $item in $i/*
   let $item := if($item/@rdf:resource)
   then (element {fn:name($item)} {replace($item/@rdf:resource/data(),"#","")})

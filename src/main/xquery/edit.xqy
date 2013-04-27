@@ -17,7 +17,19 @@ else (xdmp:log("No URI"), xdmp:get-request-url());
 declare variable $doc as element(skos:Concept) := 
 if (exists(xdmp:get-request-field("code")))
 then (xdmp:log("edit.xqy: should NOT have a request-body - likely referrer was the view page."), xdmp:unquote( xdmp:get-request-field("code"), (), ("format-xml"))/node() )
-else (xdmp:log("edit.xqy: should have a request-body - should be an XForm submit."), xdmp:get-request-body()/node());
+else (
+xdmp:log("edit.xqy: should have a request-body - should be an XForm submit."), 
+<skos:Concept 
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:wf="http://www.xmlmachines.com/workflow/">
+    {for $x in xdmp:get-request-body()/node()/*
+    return
+    if (fn:name($x) eq "skos:note")
+    then (element skos:note{xdmp:unquote($x)/node()})(: for $i in $x/* return xdmp:unquote($i)}) :)
+    else ($x)
+    }
+</skos:Concept>
+);
 
 declare variable $original-workflow as element(wf:workflow) := $doc//wf:workflow;
 

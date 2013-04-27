@@ -24,7 +24,13 @@ let $excerpt := wikipedia-enrichment:get-article-first-paragraph($article-name)
 return
     if (some $string in xs:string($excerpt) satisfies (contains($string, "Other reasons this message may be displayed:")))
     then (xdmp:log(concat("Ignoring: ", $article-name)))
-    else (element skos:note {$excerpt})
+    else (
+        element skos:note {
+            element div {
+                attribute class {"wikipedia-content"}, 
+                    $excerpt
+            }
+        })
 };
 
 (: 
