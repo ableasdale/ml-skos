@@ -4,6 +4,7 @@ module namespace xforms-skos="http://www.xmlmachines.com/xforms-skos";
 
 import module namespace xforms = "http://www.xmlmachines.com/xforms" at "/xquery/lib/xforms.xqy";
 
+declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 declare namespace xf="http://www.w3.org/2002/xforms";
 declare namespace ev="http://www.w3.org/2001/xml-events";
 declare namespace xhtml="http://www.w3.org/1999/xhtml";
@@ -40,7 +41,7 @@ declare function xforms-skos:base-model() {
      
     <!-- Nodeset bindings for TinyMCE editor -->
     <xf:bind nodeset="//skos:note" type="rte:standardHTML" />
-    <!-- xf:bind nodeset="//u:ContactInformationDescriptionText" type="rte:standardHTML" / -->
+    <xf:bind nodeset="instance('rich-text')" type="rte:standardHTML" />
 
         {if (string-length(xdmp:get-request-field("id")) gt 1)
         then (
@@ -55,6 +56,13 @@ declare function xforms-skos:base-model() {
             <data xmlns="" />
         </xf:instance>
         
+        <xf:instance id="rich-text">
+            <skos:note>
+                {xdmp:quote(doc()[1]//skos:note)}
+           </skos:note>
+        </xf:instance>
+       
+       
         {if (string-length(xdmp:get-request-field("id")) gt 1)
         then (
          <xf:submission id="save" method="put" replace="instance" instance="submit-results" action="/save/{fn:substring-before(xdmp:get-request-field("id"), ".")}" ref="instance('skos')">

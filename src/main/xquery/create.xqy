@@ -4,12 +4,16 @@ import module namespace common = "http://www.xmlmachines.com/common" at "/xquery
 import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
 import module namespace xforms = "http://www.xmlmachines.com/xforms" at "/xquery/lib/xforms.xqy";
 import module namespace xforms-skos = "http://www.xmlmachines.com/xforms-skos" at "/xquery/lib/xforms-skos.xqy"; 
- 
+
+(: declare default element namespace "http://www.w3.org/1999/xhtml"; :)
+
 declare option xdmp:output "method=xhtml"; 
 declare option xdmp:output "doctype-public=-//W3C//DTD XHTML 1.0 Strict//EN"; 
 declare option xdmp:output "doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd";
 declare option xdmp:output "omit-xml-declaration=yes";
 declare option xdmp:output "indent=yes"; 
+
+
 
 declare variable $title := "Create Concept";
 (: <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -89,8 +93,15 @@ xforms:xsltforms-pis(),
                         )
                     )
                 ),
-                (: TODO - RTE :)
-                xforms:html-textarea("skos:note"),
+                
+                xforms:xhtml-fieldset-and-legend("Note",
+                    xforms:html-textarea("skos:note")
+                ),
+                
+                xforms:xhtml-fieldset-and-legend("Note RTE",
+                    xforms:html-textarea("instance('rich-text')")
+                ),
+
                 
                 (: xforms:para-with-xf-input((), "skos:note", "span-12 tar", "Note: "), ":)
                 xforms:para-with-xf-input((), "skos:historyNote", "span-12 tar", "History note: "),
