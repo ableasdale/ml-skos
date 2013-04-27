@@ -11,11 +11,23 @@ declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 declare namespace dct="http://purl.org/dc/terms/";
 declare namespace rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 
-declare variable $doc as element(skos:Concept) := xdmp:get-request-body()/node();
+declare variable $doc as element(skos:Concept) :=
+<skos:Concept 
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:wf="http://www.xmlmachines.com/workflow/">
+    {for $x in xdmp:get-request-body()/node()/*
+    return
+    if (fn:name($x) eq "skos:note")
+    then (element skos:note{xdmp:unquote($x)/node()})(: for $i in $x/* return xdmp:unquote($i)}) :)
+    else ($x)
+    }
+</skos:Concept>;
+
 declare variable $guid as xs:string := common:guid();
 
 (: TODO - ensure user is logged in to use this service! :)
 (: TODO - language currently hard-coded :)
+(: TODO - can all "saves" all hit the same module for easier maintenance? :)
 
 declare variable $workflow as element(wf:workflow) := 
 <wf:workflow>

@@ -17,7 +17,7 @@
     <skos:narrower>#</skos:narrower>
     <skos:narrower>#</skos:narrower>
     <skos:related>#</skos:related>
-    <skos:note>#</skos:note>
+    <skos:note>&lt;div class="note"&gt;&lt;p&gt;note here&lt;/p&gt;&lt;/div&gt;</skos:note>
     <skos:historyNote>#</skos:historyNote>
     <skos:mappingRelation>#</skos:mappingRelation>
 
