@@ -1,9 +1,9 @@
+![W3C Semantic Web](http://www.w3.org/Icons/SW/sw-horz-w3c "W3C Semantic Web Logo")
+
 ml-skos
 =======
 
 MarkLogic SKOS (Simple Knowledge Organization System) Editor
-
-![W3C Semantic Web](http://www.w3.org/Icons/SW/sw-horz-w3c "W3C Semantic Web Logo")
 
 
 Installation notes
