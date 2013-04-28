@@ -1,5 +1,9 @@
 xquery version "1.0-ml";
 
+(:
+ : http://www.ivoa.net/documents/REC/Semantics/Vocabularies-20091007.html
+:)
+
 import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy"; 
 import module namespace wikipedia-enrichment = "http://www.xmlmachines.com/wikipedia-enrichment" at "/xquery/lib/wikipedia-enrichment.xqy";
 
@@ -23,7 +27,8 @@ declare function local:get-node-at($i) as element(skos:Concept){
 };
 
 declare variable $master  := 
-xdmp:document-get("file://C:/Users/Alex/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",
+(: xdmp:document-get("file://C:/Users/Alex/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",:)
+xdmp:document-get("file://Users/alexbleasdale/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",
     <options xmlns="xdmp:document-get" xmlns:http="xdmp:http">
         <format>xml</format>
     </options>

@@ -3,6 +3,8 @@ ml-skos
 
 MarkLogic SKOS (Simple Knowledge Organization System) Editor
 
+![W3C Semantic Web](http://www.w3.org/Icons/SW/sw-horz-w3c "W3C Semantic Web Logo")
+
 
 Installation notes
 ==================
@@ -12,3 +14,9 @@ Installation notes
 3. Execute the query in Query Console; this should create the database, set up the necessary range indexes and configure the application server
 
 Run the application by going to localhost:9994 (the default port) and logging in with your normal admin username and password
+
+
+Loading sample SKOS data
+========================
+
+TODO - get permission to link to a sample dataset for this
