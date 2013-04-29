@@ -10,7 +10,7 @@ declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 declare namespace dct="http://purl.org/dc/terms/";
 
 declare variable $pg as xs:integer := xs:integer(xdmp:get-request-field("p", "1"));
-declare variable $pgsize as xs:integer := 20;
+declare variable $pgsize as xs:integer := $global:PAGE-SIZE;
 declare variable $start as xs:integer := if ($pg eq 1) then(1) else($pg * $pgsize - ($pgsize - 1));
 declare variable $end as xs:integer := if ($pg eq 1) then($pgsize) else($start + ($pgsize - 1));
 

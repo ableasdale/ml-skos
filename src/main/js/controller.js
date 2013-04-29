@@ -34,7 +34,7 @@ $(function() {
     });  
        
     $('.pagination').jqPagination({
-        max_page : Math.ceil(parseInt($('#total').text()) / 20),
+        max_page : Math.ceil(parseInt($('#total').text()) / $('input[id=page-size]').val()), 
         paged: function(page) {
       
             var request = $.ajax({
