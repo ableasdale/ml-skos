@@ -23,7 +23,7 @@ declare function local:summary(){
     element div {attribute class {"span-24 last"},
         element fieldset {
             element legend {"Recently Added / Modified Concepts:"},
-            element p {element strong {attribute class {"quiet"}, xdmp:estimate(/skos:Concept)}, " Concept(s) defined. ", element strong {attribute class {"quiet"}, xdmp:estimate(cts:search(/skos:Concept, global:get-top-level-concepts-query()) )}, " top-level skos:Concept(s)" },
+            element p {element strong {attribute id {"total"}, attribute class {"quiet"}, xdmp:estimate(/skos:Concept)}, " Concept(s) defined. ", element strong {attribute class {"quiet"}, xdmp:estimate(cts:search(/skos:Concept, global:get-top-level-concepts-query()) )}, " top-level skos:Concept(s)" },
             element table { attribute id {"recent-concepts-table"},
                 element thead {
                     element tr {

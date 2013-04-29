@@ -11,13 +11,13 @@ declare namespace dct="http://purl.org/dc/terms/";
 
 declare variable $pg as xs:integer := xs:integer(xdmp:get-request-field("p", "1"));
 declare variable $pgsize as xs:integer := 20;
-declare variable $start as xs:integer := if ($pg eq 1) then(1) else($pg * $pgsize);
-declare variable $end as xs:integer := if ($pg eq 1) then($pgsize) else($start + $pgsize);
+declare variable $start as xs:integer := if ($pg eq 1) then(1) else($pg * $pgsize - ($pgsize - 1));
+declare variable $end as xs:integer := if ($pg eq 1) then($pgsize) else($start + ($pgsize - 1));
 
 ( 
 let $_ := xdmp:log(text{"Page : ",$pg})
-let $_ := xdmp:log($start)
-let $_ := xdmp:log($end)
+let $_ := xdmp:log(text{"Start : ",$start})
+let $_ := xdmp:log(text{"End: ",$end})
 let $range := for $concept in (/skos:Concept)   
 order by $concept/wf:workflow/dct:modified descending
 return $concept

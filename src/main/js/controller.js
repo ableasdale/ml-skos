@@ -34,8 +34,7 @@ $(function() {
     });  
        
     $('.pagination').jqPagination({
-        /* TODO - compute this value from total Concepts */
-        max_page : 144, /* Math.ceil($("p.quiet") / 20), */
+        max_page : Math.ceil(parseInt($('#total').text()) / 20),
         paged: function(page) {
       
             var request = $.ajax({
@@ -52,8 +51,7 @@ $(function() {
                 var $dateElem = $(dateElem);
                 $dateElem.text(moment.utc($dateElem.text()).fromNow());
             });
-        });
-        
+        });        
         
         }
 });
