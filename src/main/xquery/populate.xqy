@@ -30,7 +30,7 @@ element tr {
     element td {$i/wf:workflow/dct:creator/string()},
     element td { attribute class {"date"}, $i/wf:workflow/dct:modified/string()},
     element td {$i/wf:workflow/dct:modified-by/string()},
-    element td {cts:contains($i, global:get-top-level-concepts-query() ) },
+    element td {element a {attribute href {concat("/heirarchy/", fn:substring-before(xdmp:node-uri($i), "."))}, cts:contains($i, global:get-top-level-concepts-query()) }},
     element td { element a {attribute href {concat("/update/", fn:substring-before(xdmp:node-uri($i), "."))}, "Edit ", $i/skos:prefLabel/string()}}
 }
 

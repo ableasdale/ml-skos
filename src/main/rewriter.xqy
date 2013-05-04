@@ -30,6 +30,10 @@ declare variable $options as element(rest:options) :=
         <rest:request uri="^/view/(.+)/?$" endpoint="/xquery/view.xqy">
             <rest:uri-param name="id">$1.xml</rest:uri-param>
         </rest:request>
+        
+        <rest:request uri="^/heirarchy/(.+)/?$" endpoint="/xquery/concept-heirarchy-v2.xqy">
+            <rest:uri-param name="id">$1.xml</rest:uri-param>
+        </rest:request>
                     
         <rest:request uri="^/update/(.+)/?$" endpoint="/xquery/create.xqy">
             <rest:uri-param name="id">$1.xml</rest:uri-param>

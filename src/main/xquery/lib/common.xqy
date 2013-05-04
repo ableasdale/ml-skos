@@ -7,7 +7,38 @@ declare default function namespace "http://www.w3.org/2005/xpath-functions";
 declare namespace xhtml = "http://www.w3.org/1999/xhtml";
  
 (: note that application/xhtml+xml is *still* not supported by several modern browsers... :)
- 
+
+
+declare function common:seq-to-links($items as item()*) as item()? { (: TODO - can you do this? as  element (ul|p) :)
+    if ($items)
+    then (
+        element ul {
+            for $x in $items
+            return element li {element a {attribute href {concat("/heirarchy/", substring-before(xdmp:node-uri($x), ".xml"))}, $x}}
+        })
+    else (element p {element em {"None at this time..."}})
+};
+
+declare function common:seq-to-list($items as xs:string*) as item()?{
+    if ($items)
+    then (
+        element ul {
+            for $x in $items
+            return element li {$x}
+        })
+    else (element p {element em {"None at this time..."}})
+};
+
+declare function common:get-doc-content($q as xs:string) {
+    xdmp:tidy(xdmp:quote(doc($q)), 
+    <options xmlns="xdmp:tidy">
+        <show-warnings>no</show-warnings>
+        <input-xml>yes</input-xml>
+        <output-xml>yes</output-xml>
+        <indent>auto</indent>
+    </options>)
+};
+
 declare function common:exception($e as element(error:error)){
 element div {attribute class{"container"},
     common:html-page-header(concat("Exception Caught: ", $e/error:code/string())),

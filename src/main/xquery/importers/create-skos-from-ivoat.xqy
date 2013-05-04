@@ -28,7 +28,8 @@ declare function local:get-node-at($i) as element(skos:Concept){
 
 declare variable $master  := 
 (: xdmp:document-get("file://C:/Users/Alex/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",:)
-xdmp:document-get("file://Users/alexbleasdale/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",
+(: OSX path :)
+xdmp:document-get("/Users/alexbleasdale/Downloads/vocabularies-20091007/vocabularies-20091007/IVOAT/IVOAT.rdf",
     <options xmlns="xdmp:document-get" xmlns:http="xdmp:http">
         <format>xml</format>
     </options>

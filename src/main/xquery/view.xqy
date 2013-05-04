@@ -13,15 +13,7 @@ declare default element namespace "http://www.w3.org/1999/xhtml";
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 
 declare variable $q as xs:string := xdmp:get-request-field("id");
-
-declare variable $doc := xdmp:tidy(xdmp:quote(doc($q)), 
-    <options xmlns="xdmp:tidy">
-        <show-warnings>no</show-warnings>
-        <input-xml>yes</input-xml>
-        <output-xml>yes</output-xml>
-        <indent>auto</indent>
-    </options>);
-    
+declare variable $doc := common:get-doc-content($q);    
 declare variable $title := concat("Viewing XML Data for Concept: '", $doc//skos:prefLabel, "'");
 
 (: http://localhost:9994/test/{fn:substring-before($q, ".")} 
