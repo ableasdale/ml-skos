@@ -42,30 +42,31 @@ declare function local:heirarchy(){
         <div class="span-24 last">
             <h2>{$pref-label}</h2>
             <p>{common:create-href($doc//skos:mappingRelation, ())}</p>
-            <div>{$doc//skos:decription}</div>
+            <p>{$doc//skos:description}</p>
+            <div>{$doc//skos:note}</div>
             <hr />
         </div>
      
         <div class="span-12">
             <h3>Has the following broader concepts:</h3>
             {common:seq-to-list($doc//skos:broader/text())}
-            <p>Other docs listing this concept as a broader include:</p>
+            <h3>Other docs listing this concept as a broader include:</h3>
             {common:seq-to-links(//skos:Concept[skos:broader/text()=$pref-label]//skos:prefLabel)}
         </div>
         
         <div class="span-12 last">
             <h3>Has the following narrower concepts:</h3>
             {common:seq-to-list($doc//skos:narrower/text())}
-            <p>Other docs listing this concept as a narrower include:</p>
+            <h3>Other docs listing this concept as a narrower include:</h3>
             {common:seq-to-links(//skos:Concept[skos:narrower/text()=$pref-label]//skos:prefLabel)}
         </div>
         
         <hr />
         
         <div class="span-12">
-            <p>Has the following related concepts:</p>
+            <h3>Has the following related concepts:</h3>
             {common:seq-to-list($doc//skos:related/text())}
-            <p>Other docs listing this concept as a related include:</p>
+            <h3>Other docs listing this concept as a related include:</h3>
             {common:seq-to-links(//skos:Concept[skos:related/text()=$pref-label]//skos:prefLabel)}
         </div>
         

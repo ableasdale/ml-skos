@@ -5,6 +5,10 @@ module namespace common="http://www.xmlmachines.com/common";
 declare default function namespace "http://www.w3.org/2005/xpath-functions";
 
 declare namespace xhtml = "http://www.w3.org/1999/xhtml";
+declare namespace skos="http://www.w3.org/2004/02/skos/core#";
+
+import module namespace functx = "http://www.functx.com" at "/MarkLogic/functx/functx-1.0-nodoc-2007-01.xqy"; 
+
  
 (: note that application/xhtml+xml is *still* not supported by several modern browsers... :)
 
@@ -19,12 +23,29 @@ declare function common:seq-to-links($items as item()*) as item()? { (: TODO - c
     else (element p {element em {"None at this time..."}})
 };
 
+declare function common:search-pref-label($item as xs:string)  {
+    for $x in cts:search(doc(), cts:element-value-query(xs:QName("skos:prefLabel"), functx:camel-case-to-words($item, " "), ("case-insensitive", "whitespace-insensitive", "diacritic-insensitive")))
+    return if(xdmp:node-uri($x))
+    then (xdmp:node-uri($x))
+    else ()
+};
+
 declare function common:seq-to-list($items as xs:string*) as item()?{
     if ($items)
     then (
         element ul {
             for $x in $items
-            return element li {$x}
+            let $y := common:search-pref-label($x)
+            return 
+            
+              if (count($y) gt 1) 
+              then (
+                for $item in $y 
+                return if (string-length($item) gt 0)
+                then (element li {element a {attribute href {concat("/heirarchy/", substring-before($item, ".xml"))}, $x}})
+                else (element li {$x})
+                )              
+              else (element li {$x})
         })
     else (element p {element em {"None at this time..."}})
 };
