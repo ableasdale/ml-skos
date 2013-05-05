@@ -11,12 +11,11 @@ declare variable $doc := common:get-doc-content($q);
 declare variable $pref-label := $doc//skos:prefLabel/text();
 declare variable $title as xs:string := concat("Viewing Concept Heirarchy for '", $pref-label, "'");
 
-
+(: TODO - not used - probably safe to delete soon... :)
 declare function local:sub-req($concept-id as xs:string) as node()* {
 
 let $current-concept := //skos:Concept[skos:prefLabel=$concept-id]
    return
-
    (
     <ul>
        <li>
@@ -42,7 +41,8 @@ declare function local:heirarchy(){
     <div id="heirarchy">
         <div class="span-24 last">
             <h2>{$pref-label}</h2>
-        
+            <p>{common:create-href($doc//skos:mappingRelation, ())}</p>
+            <div>{$doc//skos:decription}</div>
             <hr />
         </div>
      
@@ -81,8 +81,6 @@ declare function local:heirarchy(){
         </div>
     </div>
 };
-
-(: local:sub-req("abundance") :)
 
 common:build-page(
     element div {attribute class {"container"},

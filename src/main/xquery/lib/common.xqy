@@ -29,6 +29,10 @@ declare function common:seq-to-list($items as xs:string*) as item()?{
     else (element p {element em {"None at this time..."}})
 };
 
+declare function common:create-href($href as xs:string, $name as xs:string?) as element(a){
+    element a {attribute href {$href}, if($name) then($name) else($href)}
+};
+
 declare function common:get-doc-content($q as xs:string) {
     xdmp:tidy(xdmp:quote(doc($q)), 
     <options xmlns="xdmp:tidy">

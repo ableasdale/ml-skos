@@ -31,7 +31,7 @@ declare variable $options as element(rest:options) :=
             <rest:uri-param name="id">$1.xml</rest:uri-param>
         </rest:request>
         
-        <rest:request uri="^/heirarchy/(.+)/?$" endpoint="/xquery/concept-heirarchy-v2.xqy">
+        <rest:request uri="^/heirarchy/(.+)/?$" endpoint="/xquery/concept-heirarchy.xqy">
             <rest:uri-param name="id">$1.xml</rest:uri-param>
         </rest:request>
                     
