@@ -39,28 +39,47 @@ let $current-concept := //skos:Concept[skos:prefLabel=$concept-id]
 };
 
 declare function local:heirarchy(){
-<div class="span-24 last">
-    <h2>{$pref-label}</h2>
-    <h3>May alternatively be known as:</h3>
-    {common:seq-to-list($doc//skos:altLabel/text())}
-    <h3>Has the following broader concepts:</h3>
-    {common:seq-to-list($doc//skos:broader/text())}
-    <p>Other docs listing this concept as a broader include:</p>
-    {common:seq-to-links(//skos:Concept[skos:broader/text()=$pref-label]//skos:prefLabel)}
-    
-    <h3>Has the following narrower concepts:</h3>
-    {common:seq-to-list($doc//skos:narrower/text())}
-    <p>Other docs listing this concept as a narrower include:</p>
-    {common:seq-to-links(//skos:Concept[skos:narrower/text()=$pref-label]//skos:prefLabel)}
-    
-    <p>Has the following related concepts:</p>
-    {common:seq-to-list($doc//skos:related/text())}
-    <p>Other docs listing this concept as a related include:</p>
-    {common:seq-to-links(//skos:Concept[skos:related/text()=$pref-label]//skos:prefLabel)}
-
-    
-    <textarea>{$doc}</textarea>
-</div>
+    <div id="heirarchy">
+        <div class="span-24 last">
+            <h2>{$pref-label}</h2>
+        
+            <hr />
+        </div>
+     
+        <div class="span-12">
+            <h3>Has the following broader concepts:</h3>
+            {common:seq-to-list($doc//skos:broader/text())}
+            <p>Other docs listing this concept as a broader include:</p>
+            {common:seq-to-links(//skos:Concept[skos:broader/text()=$pref-label]//skos:prefLabel)}
+        </div>
+        
+        <div class="span-12 last">
+            <h3>Has the following narrower concepts:</h3>
+            {common:seq-to-list($doc//skos:narrower/text())}
+            <p>Other docs listing this concept as a narrower include:</p>
+            {common:seq-to-links(//skos:Concept[skos:narrower/text()=$pref-label]//skos:prefLabel)}
+        </div>
+        
+        <hr />
+        
+        <div class="span-12">
+            <p>Has the following related concepts:</p>
+            {common:seq-to-list($doc//skos:related/text())}
+            <p>Other docs listing this concept as a related include:</p>
+            {common:seq-to-links(//skos:Concept[skos:related/text()=$pref-label]//skos:prefLabel)}
+        </div>
+        
+        <div class="span-12 last">
+            <h3>May alternatively be known as:</h3>
+            {common:seq-to-list($doc//skos:altLabel/text())}
+        </div>
+        
+        <hr />
+        
+        <div class="span-24 last">
+            <textarea>{$doc}</textarea>
+        </div>
+    </div>
 };
 
 (: local:sub-req("abundance") :)
