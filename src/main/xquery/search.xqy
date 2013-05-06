@@ -89,7 +89,7 @@ class="highlight">{fn:data($node)}</span> case text() return $node default retur
 }; :)
 
 declare function local:process-snippets($items) {
-    element ol {
+    element ol {attribute class {"bottom"},
         for $i in $items/search:match
         return
         element li {element strong {fn:substring-after($i/@path/data(), '.xml")')}, " : ",  $i/node()}  
@@ -100,28 +100,47 @@ declare function local:process-results($items) {
     for $i in $items
     return element div {
         local:process-snippets($i/search:snippet),
-        element p {element a {attribute href {concat("/view/", fn:substring-before($i/@uri/data(), "."))}, "View"}}
+        element p {attribute class {"top"}, element a {attribute href {concat("/heirarchy/", fn:substring-before($i/@uri/data(), "."))}, "View Concept Heirarchy    "}}        
     }
 };
 
-declare function local:process-facets(){
-    element p {"todo - facets..."}
+declare function local:process-facets($facets){
+    for $facet in $facets
+    return 
+    (element h3 {$facet/@name/data()},
+    element ul {
+    for $options in $facet/search:facet-value
+    return element li {$options/text()}
+    },
+    element hr {})
 };
 
 declare function local:search-results(){
-<div class="span-24">
-    <h4>Showing {$search/@start/data()} to {$search/@page-length/data()} of {$search/@total/data()} results:</h4>
-    <div>{local:process-results($search/search:result)}</div>
-    <div>{local:process-facets()}</div>
-    <textarea>{$search}</textarea>
-    <p>Good test search terms:</p>
-    <ul>
-        <li><a href="/search/star">star</a></li>
-        <li><a href="/search/cluster">cluster</a></li>
-        <li><a href="/search/system">system</a></li>
-        <li><a href="/search/mirror">mirror</a></li>
-    </ul>
-</div>
+    <div id="search-results">
+           
+        <div class="span-12">
+            <!-- TODO - fix this if there are less than @page-length results -->    
+            <h4>Showing <strong>{$search/@start/data()}</strong> to <strong>{$search/@page-length/data()}</strong> of <strong>{$search/@total/data()}</strong> results:</h4>
+            {local:process-results($search/search:result)}
+        </div>
+        
+        <div class="span-12 last">
+            <div id="facets">{local:process-facets($search/search:facet)}</div>
+            <hr />
+            <p>Good test search terms:</p>
+            <ul>
+                <li><a href="/search/star">star</a></li>
+                <li><a href="/search/cluster">cluster</a></li>
+                <li><a href="/search/system">system</a></li>
+                <li><a href="/search/mirror">mirror</a></li>
+            </ul>
+        </div>
+        
+        <div class="span-24 last">
+            <hr />
+            <textarea>{$search}</textarea>
+        </div>
+    </div>
 };
 
 
@@ -131,27 +150,3 @@ common:build-page(
         common:check-entitlement-then-do(local:search-results())
     }
 )
-
-
-
-
-
-(: 
-<!--options xmlns="http://marklogic.com/appservices/search">
-  < constraint name="sample-property-constraint">
-    <properties />
-  </constraint >
-  
-  <default-suggestion-source>
-  <range type="xs:string">
-    <element ns="my-namespace" name="my-localname"/>
-    <attribute ns="" name="my-attribute"/>
-   </range>
-</default-suggestion-source> 
-
-  
-</options--> 
-:)
-
-
-(:  return typeswitch($node)   :)
