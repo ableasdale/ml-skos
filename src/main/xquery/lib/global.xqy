@@ -10,7 +10,7 @@ declare default function namespace "http://www.w3.org/2005/xpath-functions";
 
 declare variable $PAGE-SIZE as xs:integer := 20;
 
-declare variable $DEBUG := xdmp:get-request-field("debug", "yes"); 
+declare variable $DEBUG := xdmp:get-request-field("debug", "no"); 
 (: declare variable $DEBUG := xdmp:get-request-field("debug", "yes"); :) 
 
 (: Query matches all Top Level skos:Concepts in the database - matching all skos:Concepts that don't contain skos:broader definitions :)

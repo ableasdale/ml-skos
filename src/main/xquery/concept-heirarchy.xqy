@@ -12,32 +12,6 @@ declare variable $doc := common:get-doc-content($q);
 declare variable $pref-label := $doc//skos:prefLabel/text();
 declare variable $title as xs:string := concat("Viewing Concept Heirarchy for '", $pref-label, "'");
 
-(: TODO - not used - probably safe to delete soon... :)
-declare function local:sub-req($concept-id as xs:string) as node()* {
-
-let $current-concept := //skos:Concept[skos:prefLabel=$concept-id]
-   return
-   (
-    <ul>
-       <li>
-          <a href="view-concept.xq?id=x">{$current-concept//skos:perfLabel/text()}</a> 
-          ({$concept-id})
-        
-       </li>
-       { (: Check any other terms in the collection have our element as a broader term :)
-       if (//skos:Concept[skos:broader/text()=$concept-id]) 
-         then (
-            (: Find all requirements that are sub-requirements of this requirement. :)
-            for $concept in (//skos:Concept[skos:broader/text()=$concept-id])
-               (: order by lower-case($concept/skos:perfLabel/text()) :)
-                return
-                local:sub-req($concept//skos:prefLabel/text())
-             )
-         else ()
-         }
-    </ul>)
-};
-
 declare function local:heirarchy(){
     <div id="heirarchy">
         <div class="span-24 last">

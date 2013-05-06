@@ -2,6 +2,7 @@ xquery version "1.0-ml";
 
 import module namespace search = "http://marklogic.com/appservices/search" at "/MarkLogic/appservices/search/search.xqy";
 import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
+import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
 
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 
@@ -107,26 +108,28 @@ declare function local:process-results($items) {
 declare function local:process-facets($facets){
     for $facet in $facets
     return 
-    (element h3 {$facet/@name/data()},
+    if ($facet/search:facet-value)
+    then (element h3 {$facet/@name/data()},
     element ul {
     for $options in $facet/search:facet-value
     return element li {element a {attribute href {concat("/xquery/search.xqy?q=",$q," ",$facet/@name/data(),":",$options/text())}, $options/text()}}
     })
+    else()
 };
 
 declare function local:search-results(){
     <div id="search-results">
            
-        <div class="span-12">
+        <div class="span-18">
             <!-- TODO - fix this if there are less than @page-length results -->    
             <h4>Showing <strong>{$search/@start/data()}</strong> to <strong>{$search/@page-length/data()}</strong> of <strong>{$search/@total/data()}</strong> results:</h4>
             {local:process-results($search/search:result)}
         </div>
         
-        <div class="span-12 last">
+        <div class="span-6 last">
             <div id="facets">{local:process-facets($search/search:facet)}</div>
             <hr />
-            <p>Good test search terms:</p>
+            <h4>Example search terms:</h4>
             <ul>
                 <li><a href="/search/star">star</a></li>
                 <li><a href="/search/cluster">cluster</a></li>
@@ -135,10 +138,13 @@ declare function local:search-results(){
             </ul>
         </div>
         
+        {if ($global:DEBUG eq "yes")
+        then (
         <div class="span-24 last">
             <hr />
             <textarea>{$search}</textarea>
-        </div>
+        </div>)
+        else ()}
     </div>
 };
 
