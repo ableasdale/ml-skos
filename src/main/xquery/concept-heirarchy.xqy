@@ -2,6 +2,7 @@ xquery version "1.0-ml";
 
 (: Concept Heirarchy - V2 :)
 
+import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
 import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
 
 declare namespace skos="http://www.w3.org/2004/02/skos/core#";
@@ -76,10 +77,13 @@ declare function local:heirarchy(){
         </div>
         
         <hr />
-        
+        {if ($global:DEBUG eq "yes")
+        then (
         <div class="span-24 last">
             <textarea>{$doc}</textarea>
-        </div>
+        </div>)
+        else ()
+        }
     </div>
 };
 

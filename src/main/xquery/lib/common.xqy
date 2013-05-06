@@ -24,7 +24,6 @@ declare function common:seq-to-links($items as item()*) as item()? { (: TODO - c
 };
 
 declare function common:search-pref-label($item as xs:string) {
-    let $_ := xdmp:log(concat("item: ", functx:camel-case-to-words($item, " ")))
     for $x in cts:search(doc(), cts:element-value-query(xs:QName("skos:prefLabel"), functx:camel-case-to-words($item, " "), ("case-insensitive", "whitespace-insensitive", "diacritic-insensitive")))
     return xdmp:node-uri($x)
 };

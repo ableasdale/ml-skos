@@ -14,11 +14,7 @@ declare variable $pgsize as xs:integer := $global:PAGE-SIZE;
 declare variable $start as xs:integer := if ($pg eq 1) then(1) else($pg * $pgsize - ($pgsize - 1));
 declare variable $end as xs:integer := if ($pg eq 1) then($pgsize) else($start + ($pgsize - 1));
 
-( 
-let $_ := xdmp:log(text{"Page : ",$pg})
-let $_ := xdmp:log(text{"Start : ",$start})
-let $_ := xdmp:log(text{"End: ",$end})
-let $range := for $concept in (/skos:Concept)   
+(let $range := for $concept in (/skos:Concept)   
 order by $concept/wf:workflow/dct:modified descending
 return $concept
 
@@ -32,7 +28,4 @@ element tr {
     element td {$i/wf:workflow/dct:modified-by/string()},
     element td {element a {attribute href {concat("/heirarchy/", fn:substring-before(xdmp:node-uri($i), "."))}, cts:contains($i, global:get-top-level-concepts-query()) }},
     element td { element a {attribute href {concat("/update/", fn:substring-before(xdmp:node-uri($i), "."))}, "Edit ", $i/skos:prefLabel/string()}}
-}
-
-
-)
+})
