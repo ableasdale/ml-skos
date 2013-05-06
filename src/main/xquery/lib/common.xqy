@@ -23,11 +23,10 @@ declare function common:seq-to-links($items as item()*) as item()? { (: TODO - c
     else (element p {element em {"None at this time..."}})
 };
 
-declare function common:search-pref-label($item as xs:string)  {
+declare function common:search-pref-label($item as xs:string) {
+    let $_ := xdmp:log(concat("item: ", functx:camel-case-to-words($item, " ")))
     for $x in cts:search(doc(), cts:element-value-query(xs:QName("skos:prefLabel"), functx:camel-case-to-words($item, " "), ("case-insensitive", "whitespace-insensitive", "diacritic-insensitive")))
-    return if(xdmp:node-uri($x))
-    then (xdmp:node-uri($x))
-    else ()
+    return xdmp:node-uri($x)
 };
 
 declare function common:seq-to-list($items as xs:string*) as item()?{
@@ -37,8 +36,7 @@ declare function common:seq-to-list($items as xs:string*) as item()?{
             for $x in $items
             let $y := common:search-pref-label($x)
             return 
-            
-              if (count($y) gt 1) 
+              if (count($y) gt 0) 
               then (
                 for $item in $y 
                 return if (string-length($item) gt 0)
