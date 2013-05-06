@@ -103,7 +103,13 @@ xforms:xsltforms-pis(),
                 xforms:para-with-xf-input((), "skos:mappingRelation", "span-12 tar", "Mapping relation: ")
                 
             )
-        )}
+        ),
+            xforms:xhtml-fieldset-and-legend("Concept Submission", 
+            <xf:submit submission="save">
+                <xf:label>Save Concept</xf:label>
+            </xf:submit>)
+        
+        }
         
         <!-- TODO - is this modal message all XSLTForms has to offer??? 
          <xf:trigger>
@@ -111,14 +117,11 @@ xforms:xsltforms-pis(),
             <xf:message level="modal" ev:event="DOMActivate">This is a modal message.</xf:message>
          </xf:trigger> -->
          
-            <xf:submit submission="save">
-                <xf:label>Save Concept</xf:label>
-            </xf:submit>
+            
             <!-- TODO - are modal messages supported in XSLTForms? and can xf:output return xhtml?  the response from MarkLogic is.. -->
             
             <xf:switch>
                 <xf:case id="ready">
-                    <p>Form ready</p>
                     <xf:message level="modal" ev:event="DOMActivate">Ready!</xf:message>
                 </xf:case>
                 <xf:case id="case-busy">
