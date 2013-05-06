@@ -16,14 +16,6 @@ declare variable $q as xs:string := xdmp:get-request-field("id");
 declare variable $doc := common:get-doc-content($q);    
 declare variable $title := concat("Viewing XML Data for Concept: '", $doc//skos:prefLabel, "'");
 
-(: http://localhost:9994/test/{fn:substring-before($q, ".")} 
-
-accept-charset="utf-8" enctype="multipart/form-data"
-
-<p><input type="hidden" name="id" value="{$q}" /></p>
-<p><textarea rows="10" cols="20" id="code" name="code">{$doc[2]}</textarea>
-            
-:)
 declare function local:codemirror(){
     (<div class="span-24 last">
         <p><a href="/heirarchy/{fn:substring-before($q, ".")}">View Concept heirarchy</a></p>
