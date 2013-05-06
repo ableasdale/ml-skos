@@ -110,9 +110,8 @@ declare function local:process-facets($facets){
     (element h3 {$facet/@name/data()},
     element ul {
     for $options in $facet/search:facet-value
-    return element li {$options/text()}
-    },
-    element hr {})
+    return element li {element a {attribute href {concat("/xquery/search.xqy?q=",$q,"&amp;",$facet/@name/data(),"=",$options/text())}, $options/text()}}
+    })
 };
 
 declare function local:search-results(){
