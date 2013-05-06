@@ -26,6 +26,7 @@ accept-charset="utf-8" enctype="multipart/form-data"
 :)
 declare function local:codemirror(){
     (<div class="span-24 last">
+        <p><a href="/heirarchy/{fn:substring-before($q, ".")}">View Concept heirarchy</a></p>
         <form action="/save/{fn:substring-before($q, ".")}" method="POST">
             <p><textarea rows="10" cols="20" id="code" name="code">{$doc[2]}</textarea></p>
             <p class="prepend-top">    
