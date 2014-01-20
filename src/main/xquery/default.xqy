@@ -22,6 +22,45 @@ declare variable $title as xs:string := "Home";
 declare function local:summary(){
     element div {attribute class {"span-24 last"},
         element fieldset {
+            element legend {"Recently Added / Modified Concept[s]:"},
+            element p {element strong {attribute id {"total"}, attribute class {"quiet"}, xdmp:estimate(/skos:Concept)}, " Concept(s) defined. ", element strong {attribute class {"quiet"}, xdmp:estimate(cts:search(/skos:Concept, global:get-top-level-concepts-query()) )}, " top-level skos:Concept(s)" },
+            element p {"A total of: ", fn:count( cts:triples() ), " triples currently in the database"},
+            element table { attribute id {"recent-concepts-table"},
+                element thead {
+                    element tr {
+                        element th {"Concept Name"},
+                        element th {"Added"},
+                        element th {"Added by"},
+                        element th {"Last Modified"},
+                        element th {"Modified by"},
+                        element th {"Top Level"},
+                        element th {"Update Concept"}
+                    }
+                },
+                element tbody {
+                    element tr {
+                        element td {attribute colspan {"6"}, "Loading.."}
+                    }
+                }
+            },
+                
+            <div class="pagination">
+                <a href="#" class="first" data-action="first">&laquo;</a>
+                <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+                <input type="text" readonly="readonly" data-max-page="40" />
+                <input type="hidden" id="page-size" value="{$global:PAGE-SIZE}"/>
+                <a href="#" class="next" data-action="next">&rsaquo;</a>
+                <a href="#" class="last" data-action="last">&raquo;</a>
+            </div>
+            
+        }
+    }
+};
+
+
+declare function local:summary-ml6(){
+    element div {attribute class {"span-24 last"},
+        element fieldset {
             element legend {"Recently Added / Modified Concepts:"},
             element p {element strong {attribute id {"total"}, attribute class {"quiet"}, xdmp:estimate(/skos:Concept)}, " Concept(s) defined. ", element strong {attribute class {"quiet"}, xdmp:estimate(cts:search(/skos:Concept, global:get-top-level-concepts-query()) )}, " top-level skos:Concept(s)" },
             element table { attribute id {"recent-concepts-table"},
