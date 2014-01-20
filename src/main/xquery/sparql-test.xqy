@@ -27,3 +27,19 @@ SELECT * WHERE
 FILTER (regex(?p, "definition","i"))
 }
 ')  
+
+(: show distinct predicate IRIs :)
+sem:sparql('    
+    SELECT DISTINCT ?p WHERE
+    { ?s ?p ?o . }     
+ ')
+ 
+ (: slightly closer to getting the list of definitions with this approach :)
+sem:sparql('
+  SELECT ?o
+  WHERE {?s <http://www.w3.org/2008/05/skos#definition> ?o}
+') 
+
+(: pagination :)
+OFFSET 3
+LIMIT 1
