@@ -34,7 +34,7 @@ sem:sparql('
     { ?s ?p ?o . }     
  ')
  
- (: slightly closer to getting the list of definitions with this approach :)
+ (: slightly closer to getting the list of SKOS definitions with this approach :)
 sem:sparql('
   SELECT ?o
   WHERE {?s <http://www.w3.org/2008/05/skos#definition> ?o}

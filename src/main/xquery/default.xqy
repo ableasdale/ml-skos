@@ -1,5 +1,7 @@
 xquery version "1.0-ml";
 
+import module namespace sem = "http://marklogic.com/semantics" at "/MarkLogic/semantics.xqy";
+
 import module namespace global = "http://www.xmlmachines.com/global" at "/xquery/lib/global.xqy"; 
 import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
 
@@ -23,7 +25,14 @@ declare function local:summary(){
     element div {attribute class {"span-24 last"},
         element fieldset {
             element legend {"Recently Added / Modified Concept[s]:"},
-            element p {element strong {attribute id {"total"}, attribute class {"quiet"}, xdmp:estimate(/skos:Concept)}, " Concept(s) defined. ", element strong {attribute class {"quiet"}, xdmp:estimate(cts:search(/skos:Concept, global:get-top-level-concepts-query()) )}, " top-level skos:Concept(s)" },
+            
+            element p {element strong {attribute id {"total"}, attribute class {"quiet"}, fn:count(sem:sparql('
+  SELECT ?o
+  WHERE {?s <http://www.w3.org/2008/05/skos#definition> ?o}
+')) }, 
+            " Concept(s) defined. ", element strong {attribute class {"quiet"}, 
+            xdmp:estimate(cts:search(/skos:Concept, global:get-top-level-concepts-query()) )}, " top-level skos:Concept(s)" },
+            
             element p {"A total of: ", fn:count( cts:triples() ), " triples currently in the database"},
             element table { attribute id {"recent-concepts-table"},
                 element thead {
