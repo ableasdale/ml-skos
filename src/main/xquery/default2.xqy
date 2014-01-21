@@ -1,5 +1,5 @@
 xquery version "1.0-ml";
-(: <link rel="stylesheet" href="/css/pure-min.css" /> :)
+
 (xdmp:set-response-content-type("text/html"), xdmp:set-response-encoding("utf-8"), (
 "<!DOCTYPE html>",
 <html lang="en">
@@ -11,15 +11,27 @@ xquery version "1.0-ml";
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css" />
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
 
+<script type="text/javascript" src="//use.typekit.net/fra0uyr.js"></script>
+<script type="text/javascript"><![CDATA[try{Typekit.load();}catch(e){}]]></script>
 
 <style type="text/css">
 <![CDATA[
-.header h1 {
-    font-size: 3em;
-    font-weight: 300;
-    margin: 0.2em 0;
+h1 {
+    font-family: "calluna",serif;
+    font-style: normal;
+    font-weight: 400; 
 }
-.header h1 {font-family: "omnes-pro",sans-serif;}
+
+.pure-form button {margin:0 0 0 1em;}
+.title-heading {margin-top:0;}
+
+.content {
+    margin: 0 auto;
+    padding: 0 2em;
+    max-width: 1000px;
+    margin-bottom: 50px;
+}
+
 ]]>
 </style>
 
@@ -33,50 +45,55 @@ xquery version "1.0-ml";
      </ul>
 </div>
 
-<div class="pure-u-1" id="main">
-    <div class="content">
-
-        <div class="header">
-            <h1>SKOS Editor : Home</h1>
+<div class="content">
+    <div class="pure-g-r">
+        <div class="pure-u-1-2">
+            <h1 class="title-heading"><abbr title="Simple Knowledge Organization System">SKOS</abbr> Editor : Home</h1>
         </div>
-    
-        <form class="pure-form">
-            <fieldset>
-                <input type="text" class="pure-input-rounded" placeholder="Search Term"/>
-    
-                <button type="submit" class="pure-button">
-                    <i class="icon-search">&nbsp;</i> Search
-                </button>
-            </fieldset>
-        </form>
-
-
-        <table class="pure-table pure-table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                </tr>
-            </thead>
+        <div class="pure-u-1-2">
+            <form class="pure-form">
+                <fieldset>
+                    <input type="text" class="pure-input-rounded" placeholder="Search Term"/>
         
-            <tbody>
-               <tr>
-                    <td>1</td>
-                    <td>Honda</td>
-                    <td>Accord</td>
-                    <td>2009</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Toyota</td>
-                    <td>Camry</td>
-                    <td>2012</td>
-                </tr>
-            </tbody>
-        </table>   
-
+                    <button type="submit" class="pure-button">
+                        <i class="icon-search">&nbsp;</i> Search
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>    
+    
+    <div class="pure-g-r">
+        <div class="pure-u-1">
+        
+            
+            <table class="pure-table pure-table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                   <tr>
+                        <td>1</td>
+                        <td>Honda</td>
+                        <td>Accord</td>
+                        <td>2009</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Toyota</td>
+                        <td>Camry</td>
+                        <td>2012</td>
+                    </tr>
+                </tbody>
+            </table>   
+    
+        </div>
     </div>
 </div>
 </body>
