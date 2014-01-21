@@ -6,7 +6,7 @@ import module namespace sem = "http://marklogic.com/semantics"
 
 declare variable $rdf := <rdf:RDF 
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  xmlns:skos="http://www.w3.org/2008/05/skos#">
 
   <skos:Concept rdf:about="http://www.alexandria.ucsb.edu/gazetteer/FeatureTypes/ver100301/#canals">
     <skos:definition>A feature type category for places such as the Erie Canal</skos:definition>
