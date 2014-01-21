@@ -26,7 +26,7 @@ declare function local:summary(){
         element fieldset {
             element legend {"Recently Added / Modified Concept[s]:"},
             
-            element p {element strong {attribute id {"total"}, attribute class {"quiet"}, fn:count(sem:sparql('
+            element p {element strong {attribute id {"total"}, attribute class {"quiet"}, count(sem:sparql('
   SELECT ?o
   WHERE {?s <http://www.w3.org/2008/05/skos#definition> ?o}
 ')) }, 

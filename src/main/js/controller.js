@@ -3,7 +3,9 @@ $(function() {
     var request = $.ajax({
         url : "/xquery/populate.xqy",
         type : "get",
-        dataType : "html"
+        dataType : "html",
+        // TODO - find out if below is doing what we would expect it to...
+        accept : "text/html"
      });
     request.done(function (response, textStatus, jqXHR) {
         $("#recent-concepts-table > tbody").html(response);
