@@ -35,7 +35,7 @@ xdmp:document-get("/Users/alexbleasdale/Downloads/vocabularies-20091007/vocabula
     </options>
 );
 
-for $i in ($master//skos:Concept)[1 to 50]
+for $i in ($master//skos:Concept)
 return 
 xdmp:document-insert(
 concat(common:guid(),".xml"),
