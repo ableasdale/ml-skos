@@ -10,6 +10,7 @@ declare variable $group as xs:unsignedLong := admin:group-get-id($config, "Defau
 
 - triple index configured
 - all sem options enabled
+- configure Xray app server (optional?)
 :)
 
 (: Configure the following values accordingly so modules can be read from the filesystem - for example - E:\work\ml-skos\src\main\ :)
