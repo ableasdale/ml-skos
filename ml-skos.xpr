@@ -6,6 +6,6 @@
     </meta>
     <projectTree name="ml-skos.xpr">
         <folder path="src/"/>
-	<folder path="xray/"/>
+        <folder path="test/"/>
     </projectTree>
 </project>
