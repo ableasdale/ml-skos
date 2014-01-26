@@ -7,7 +7,7 @@ import module namespace sem = "http://marklogic.com/semantics" at "/MarkLogic/se
 
 declare variable $RDF-DOC := xdmp:unquote(xdmp:filesystem-file(fn:concat(xdmp:modules-root(),"/test/resources/rdf-skos-concept.xml"))); 
 
-declare %test:case function should-validate-sample-skos-concept-against-current-schema ()
+declare %test:case function should-validate-sample-RDF-XML-skos-concept-against-current-schema ()
 {
     assert:equal(xdmp:validate($RDF-DOC), <xdmp:validation-errors />)
 };      
