@@ -20,9 +20,10 @@ let $range := sem:sparql('
   WHERE {?s <http://www.w3.org/2008/05/skos#definition> ?o}
 ')
 return 
-for $i in $range[$start to $end]
+for $i at $pos in $range[$start to $end]
 return (
 element tr {
+    element td {$pos},
     element td { map:get($i, "o") }
     (:
     element td { element a {attribute href {concat("/view/", fn:substring-before(xdmp:node-uri($i), "."))}, $i }} 

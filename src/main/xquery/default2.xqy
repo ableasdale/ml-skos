@@ -1,5 +1,7 @@
 xquery version "1.0-ml";
 
+import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
+
 (xdmp:set-response-content-type("text/html"), xdmp:set-response-encoding("utf-8"), (
 "<!DOCTYPE html>",
 <html lang="en">
@@ -7,9 +9,10 @@ xquery version "1.0-ml";
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="utf-8" />
     <title>ML-SKOS : Test Layout</title>
+    {common:html-head2()}
     
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css" />
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
 
 <script type="text/javascript" src="//use.typekit.net/fra0uyr.js"></script>
 <script type="text/javascript"><![CDATA[try{Typekit.load();}catch(e){}]]></script>
@@ -66,8 +69,9 @@ h1 {
     <div class="pure-g-r">
         <div class="pure-u-1">
         
+         {element p {"A total of ", element strong {fn:count( cts:triples() )}, " triples currently in the database"}}
             
-            <table class="pure-table pure-table-striped">
+            <table class="pure-table pure-table-striped" id="recent-concepts-table">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -79,16 +83,8 @@ h1 {
             
                 <tbody>
                    <tr>
-                        <td>1</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
+                        <td colspan="6">LOADING</td>
+                        
                     </tr>
                 </tbody>
             </table>   

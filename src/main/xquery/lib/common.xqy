@@ -104,6 +104,16 @@ declare function common:html-head() {
     )
 };
 
+(: PARTIALLY REFACTORED HEADER :)
+declare function common:html-head2() {
+    (
+    element script {attribute type {"text/javascript"}, attribute src {"/js/moment.min.js"}, " "}, 
+    element script {attribute src {"//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"}, " "}, 
+    element script {attribute src {"/js/jquery.jqpagination.min.js"}, " "},
+    element script {attribute type {"text/javascript"}, attribute src {"/js/controller.js"}, " "}
+    )
+};
+
 declare function common:show-current-user(){
 if (xdmp:get-current-user() eq "nobody")
 then (element p {element em {"You are not logged in"}})
