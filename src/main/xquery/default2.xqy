@@ -2,6 +2,12 @@ xquery version "1.0-ml";
 
 import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
 
+declare variable $pg as xs:integer := xs:integer(xdmp:get-request-field("p", "1"));
+declare variable $total as xs:integer := count(sem:sparql('
+  SELECT ?o
+  WHERE {?s <http://www.w3.org/2008/05/skos#definition> ?o}
+'));
+
 (xdmp:set-response-content-type("text/html"), xdmp:set-response-encoding("utf-8"), (
 "<!DOCTYPE html>",
 <html lang="en">
@@ -70,7 +76,7 @@ h1 {
         <div class="pure-u-1">
         
          {element p {"A total of ", element strong {fn:count( cts:triples() )}, " triples currently in the database"}}
-            
+         <p>{$total}</p>
             <table class="pure-table pure-table-striped" id="recent-concepts-table">
                 <thead>
                     <tr>
@@ -84,22 +90,10 @@ h1 {
                 <tbody>
                    <tr>
                         <td colspan="6">LOADING</td>
-                        
                     </tr>
                 </tbody>
             </table>
-             
-             
-             <p><ul class="pure-paginator">
-                <li><a class="pure-button prev" href="#">&#171;</a></li>
-                <li><a class="pure-button pure-button-active" href="#">1</a></li>
-                <li><a class="pure-button" href="#">2</a></li>
-                <li><a class="pure-button" href="#">3</a></li>
-                <li><a class="pure-button" href="#">4</a></li>
-                <li><a class="pure-button" href="#">5</a></li>
-                <li><a class="pure-button next" href="#">&#187;</a></li>
-            </ul></p>
-    
+            {common:pagination-widget($pg, $total)} 
         </div>
     </div>
 </div>

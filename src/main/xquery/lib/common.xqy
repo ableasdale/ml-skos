@@ -229,3 +229,15 @@ declare private function common:random-hex($seq as xs:integer*) as xs:string+ {
 declare function common:guid() as xs:string {
   fn:string-join(common:random-hex((8,4,4,4,12)),"-")
 }; 
+
+declare function common:pagination-widget($pg as xs:integer, $total as xs:integer) as element(p) {
+<p><ul class="pure-paginator">
+    <li><a class="pure-button prev" href="#">&#171;</a></li>
+    <li><a class="pure-button pure-button-active" href="#">1</a></li>
+    <li><a class="pure-button" href="#">2</a></li>
+    <li><a class="pure-button" href="#">3</a></li>
+    <li><a class="pure-button" href="#">4</a></li>
+    <li><a class="pure-button" href="#">5</a></li>
+    <li><a class="pure-button next" href="#">&#187;</a></li>
+</ul></p>
+};
