@@ -6,9 +6,16 @@ import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic
 declare variable $config as element(configuration) := admin:get-configuration();
 declare variable $group as xs:unsignedLong := admin:group-get-id($config, "Default");
 
+(: TODO - needs an ML 7 rewrite 
+
+- triple index configured
+- all sem options enabled
+:)
+
 (: Configure the following values accordingly so modules can be read from the filesystem - for example - E:\work\ml-skos\src\main\ :)
 declare variable $http-server-port as xs:unsignedLong := 9994;
 declare variable $http-server-name as xs:string := concat("http-",$http-server-port,"-ml-skos");
+(: /home/ableasdale/workspace/ml-skos/src/main :)
 declare variable $path-to-application-modules := "/SET_YOUR_LOCAL_PATH_TO/ml-skos/src/main";
 
 declare function local:create-database() {
