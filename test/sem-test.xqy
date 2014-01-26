@@ -9,7 +9,7 @@ declare variable $RDF-DOC := xdmp:unquote(xdmp:filesystem-file(fn:concat(xdmp:mo
 
 declare %test:case function should-validate-sample-skos-concept-against-current-schema ()
 {
-    fn:error()
+    assert:equal(xdmp:validate($RDF-DOC), <xdmp:validation-errors />)
 };      
       
 declare %test:case function should-be-able-to-create-20-rdf-triples-from-sample-skos-concept ()
