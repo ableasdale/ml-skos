@@ -8,7 +8,7 @@ declare namespace skos="http://www.w3.org/2004/02/skos/core#";
 declare default element namespace "http://www.w3.org/1999/xhtml";
 declare default function namespace "http://www.w3.org/2005/xpath-functions";
 
-declare variable $PAGE-SIZE as xs:integer := 20;
+declare variable $PAGE-SIZE as xs:integer := 15;
 
 declare variable $DEBUG := xdmp:get-request-field("debug", "no"); 
 (: declare variable $DEBUG := xdmp:get-request-field("debug", "yes"); :) 
