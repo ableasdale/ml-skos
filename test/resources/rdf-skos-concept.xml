@@ -2,7 +2,9 @@
 <rdf:RDF 
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:skos="http://www.w3.org/2008/05/skos#"
-    xmlns:dct="http://purl.org/dc/terms/">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xsi:schemaLocation="../../schemas/rdfxml.xsd">
 <skos:Concept rdf:about="http://www.alexandria.ucsb.edu/gazetteer/FeatureTypes/ver100301/#canals">
     <skos:definition>A feature type category for places such as the Erie Canal</skos:definition>
     <skos:prefLabel>canals</skos:prefLabel>
