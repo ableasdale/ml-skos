@@ -1,9 +1,10 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:wf="http://www.xmlmachines.com/workflow/"
+    xmlns:dct="http://purl.org/dc/terms/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#" elementFormDefault="qualified"
     targetNamespace="http://www.w3.org/2004/02/skos/core#">
-    <xs:import namespace="http://www.xmlmachines.com/workflow/" schemaLocation="workflow.xsd"/>
+    <xs:import namespace="http://purl.org/dc/terms/" schemaLocation="dublin-core.xsd"/>
+    
     <xs:element name="Concept">
         <xs:complexType>
             <xs:sequence>
@@ -59,7 +60,12 @@
                         <xs:documentation>Concept is in mapping relation with..</xs:documentation>
                     </xs:annotation>
                 </xs:element>
-                <xs:element minOccurs="0" ref="wf:workflow" />
+                
+                <xs:element minOccurs="1" ref="dct:created"/>
+                <xs:element minOccurs="1" ref="dct:creator"/>
+                <xs:element minOccurs="1" ref="dct:modified"/>
+                <xs:element minOccurs="1" ref="dct:modified-by"/>
+                <xs:element minOccurs="1" ref="dct:language"/>
             </xs:sequence>            
         </xs:complexType>
     </xs:element>
