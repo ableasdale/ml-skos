@@ -1,6 +1,7 @@
 xquery version "1.0-ml";
 
 import module namespace common = "http://www.xmlmachines.com/common" at "/xquery/lib/common.xqy";
+import module namespace html-view = "http://www.xmlmachines.com/html-view" at "/xquery/lib/html-view.xqy";
 
 declare variable $pg as xs:integer := xs:integer(xdmp:get-request-field("p", "1"));
 declare variable $total as xs:integer := count(sem:sparql('
@@ -77,23 +78,7 @@ h1 {
         
          {element p {"A total of ", element strong {fn:count( cts:triples() )}, " triples currently in the database"}}
          <p>{$total}</p>
-            <table class="pure-table pure-table-striped" id="recent-concepts-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Concept</th>
-                        <th>TODO</th>
-                        <th>TODO</th>
-                    </tr>
-                </thead>
-            
-                <tbody>
-                   <tr>
-                        <td colspan="6">LOADING</td>
-                    </tr>
-                </tbody>
-            </table>
-            {common:pagination-widget($pg, $total)} 
+        {html-view:dynamic-table(("#", "Concept Name", "Added", "Added by", "Last Modified", "Modified by", "Top Level", "Update Concept"), $pg, $total)}
         </div>
     </div>
 </div>

@@ -9,6 +9,7 @@ declare default element namespace "http://www.w3.org/1999/xhtml";
 declare default function namespace "http://www.w3.org/2005/xpath-functions";
 
 declare variable $PAGE-SIZE as xs:integer := 15;
+declare variable $PAGINATION-LISTSIZE as xs:integer := 10;
 
 declare variable $DEBUG := xdmp:get-request-field("debug", "no"); 
 (: declare variable $DEBUG := xdmp:get-request-field("debug", "yes"); :) 
