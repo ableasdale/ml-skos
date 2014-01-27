@@ -24,6 +24,11 @@ declare function html-view:dynamic-table($ths as xs:string+, $pg as xs:integer, 
 </div>
 };
 
+declare function html-view:pagination-positional-link($x, $pg) as xs:string {
+    if ($x eq 1) 
+    then ("?p=1")
+    else (concat("?p=",$pg + ($x - 1)))
+};
 
 declare function html-view:pagination-widget($pg as xs:integer, $total as xs:integer) as element(div) {
 <div>
@@ -31,7 +36,7 @@ declare function html-view:pagination-widget($pg as xs:integer, $total as xs:int
         <li><a class="pure-button prev" href="#">&#171;</a></li>
         {
         for $x in (1 to $global:PAGINATION-LISTSIZE) return
-        <li><a class="pure-button{if($x eq $pg) then(" pure-button-active") else()}" href="#">{$x}</a></li>
+        <li><a class="pure-button{if($x eq $pg) then(" pure-button-active") else()}" href="{html-view:pagination-positional-link($x, $pg)}">{$x}</a></li>
         }
         
         <li><a class="pure-button next" href="#">&#187;</a></li>
